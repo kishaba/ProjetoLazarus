@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="10"/>
     <BuildModes Active="Default"/>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -31,6 +31,7 @@
         <ComponentName Value="frmPadrao"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFormPadrao"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="57"/>
         <CursorPos X="78" Y="81"/>
@@ -45,11 +46,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="uDtmGlobal"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="48" Y="11"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="ucadproduto.pas"/>
@@ -59,19 +58,18 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uCadProduto"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="112"/>
-        <CursorPos X="15" Y="132"/>
+        <TopLine Value="55"/>
+        <CursorPos X="6" Y="94"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="C:\lazarus\fpc\3.0.4\source\packages\fcl-db\src\sqldb\sqldb.pp"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="526"/>
         <CursorPos X="3" Y="616"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="C:\lazarus\lcl\dbctrls.pp"/>
@@ -88,132 +86,148 @@
         <ComponentName Value="frmPesquisa"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPesquisa"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="55"/>
-        <CursorPos X="43" Y="79"/>
+        <TopLine Value="12"/>
+        <CursorPos X="90" Y="27"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="ulanpedidovenda.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmPadrao1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uLanPedidoVenda"/>
+        <EditorIndex Value="5"/>
+        <CursorPos X="76" Y="14"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit8>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="17" Column="5"/>
+        <Caret Line="19" Column="16"/>
       </Position1>
       <Position2>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="66" TopLine="63"/>
+        <Caret Line="54" Column="16" TopLine="11"/>
       </Position2>
       <Position3>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="105" Column="4" TopLine="71"/>
+        <Caret Line="103" Column="4" TopLine="60"/>
       </Position3>
       <Position4>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="54" Column="16" TopLine="29"/>
+        <Caret Line="19" Column="16"/>
       </Position4>
       <Position5>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="19" Column="16"/>
+        <Caret Line="54" Column="31" TopLine="11"/>
       </Position5>
       <Position6>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="54" Column="16" TopLine="11"/>
+        <Caret Line="91" Column="6" TopLine="72"/>
       </Position6>
       <Position7>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="103" Column="4" TopLine="60"/>
+        <Caret Line="49" Column="113" TopLine="36"/>
       </Position7>
       <Position8>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="19" Column="16"/>
+        <Caret Line="46" Column="8" TopLine="27"/>
       </Position8>
       <Position9>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="54" Column="31" TopLine="11"/>
+        <Caret Line="78" Column="24" TopLine="52"/>
       </Position9>
       <Position10>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="91" Column="6" TopLine="72"/>
+        <Caret Line="77" Column="10" TopLine="53"/>
       </Position10>
       <Position11>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="10" Column="48"/>
+        <Filename Value="ucadproduto.pas"/>
+        <Caret Line="75" Column="8" TopLine="72"/>
       </Position11>
       <Position12>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="49" Column="113" TopLine="36"/>
+        <Caret Line="140" Column="25" TopLine="95"/>
       </Position12>
       <Position13>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="46" Column="8" TopLine="27"/>
+        <Caret Line="110" Column="105" TopLine="97"/>
       </Position13>
       <Position14>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="78" Column="24" TopLine="52"/>
+        <Caret Line="100" Column="3" TopLine="98"/>
       </Position14>
       <Position15>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="77" Column="10" TopLine="53"/>
+        <Caret Line="120" Column="107" TopLine="103"/>
       </Position15>
       <Position16>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="75" Column="8" TopLine="72"/>
+        <Caret Line="133" Column="3" TopLine="106"/>
       </Position16>
       <Position17>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="140" Column="25" TopLine="95"/>
+        <Caret Line="145" Column="31" TopLine="112"/>
       </Position17>
       <Position18>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="110" Column="105" TopLine="97"/>
+        <Caret Line="89" Column="13" TopLine="86"/>
       </Position18>
       <Position19>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="100" Column="3" TopLine="98"/>
+        <Caret Line="26" Column="25"/>
       </Position19>
       <Position20>
         <Filename Value="ucadproduto.pas"/>
-        <Caret Line="120" Column="107" TopLine="103"/>
+        <Caret Line="89" Column="13" TopLine="67"/>
       </Position20>
       <Position21>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="133" Column="3" TopLine="106"/>
+        <Filename Value="upesquisa.pas"/>
+        <Caret Line="36" Column="3"/>
       </Position21>
       <Position22>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="145" Column="31" TopLine="112"/>
+        <Filename Value="upesquisa.pas"/>
+        <Caret Line="28" Column="46" TopLine="10"/>
       </Position22>
       <Position23>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="89" Column="13" TopLine="86"/>
+        <Filename Value="upesquisa.pas"/>
+        <Caret Line="97" TopLine="47"/>
       </Position23>
       <Position24>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="26" Column="25"/>
+        <Filename Value="upesquisa.pas"/>
+        <Caret Line="18" Column="51" TopLine="6"/>
       </Position24>
       <Position25>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="89" Column="13" TopLine="67"/>
+        <Filename Value="upesquisa.pas"/>
+        <Caret Line="79" Column="43" TopLine="55"/>
       </Position25>
       <Position26>
         <Filename Value="upesquisa.pas"/>
-        <Caret Line="36" Column="3"/>
+        <Caret Line="44" Column="6" TopLine="19"/>
       </Position26>
       <Position27>
         <Filename Value="upesquisa.pas"/>
-        <Caret Line="28" Column="46" TopLine="10"/>
+        <Caret Line="45" Column="6" TopLine="19"/>
       </Position27>
       <Position28>
         <Filename Value="upesquisa.pas"/>
-        <Caret Line="97" TopLine="47"/>
+        <Caret Line="46" Column="6" TopLine="19"/>
       </Position28>
       <Position29>
         <Filename Value="upesquisa.pas"/>
-        <Caret Line="18" Column="51" TopLine="6"/>
+        <Caret Line="27" Column="34" TopLine="20"/>
       </Position29>
+      <Position30>
+        <Filename Value="ucadproduto.pas"/>
+        <Caret Line="132" Column="15" TopLine="112"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>

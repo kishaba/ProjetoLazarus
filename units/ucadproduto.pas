@@ -55,7 +55,7 @@ uses
 procedure TfrmCadProduto.edtlocalizarKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  {if key = VK_RETURN then
+  if key = VK_RETURN then
   begin
    grdConsulta.Enabled := true;
     grdConsulta.SetFocus;
@@ -66,9 +66,9 @@ begin
    dsPadrao.DataSet.Open;
    dsPadrao.DataSet.Locate('DESCRICAO', edtlocalizar.Text,
        [loPartialKey,loCaseInsensitive]);
-  end}
+  end
 
-  if key = VK_RETURN then
+  {if key = VK_RETURN then
   begin
     grdConsulta.Enabled := true;
     grdConsulta.SetFocus;
@@ -80,7 +80,7 @@ begin
     dtmGlobal.qryProduto.Filter:='descricao = "*'+edtlocalizar.Text+'*"';
     dtmGlobal.qryProduto.Filtered:=True;
   end
-  else dtmGlobal.qryProduto.Filtered:=false;
+  else dtmGlobal.qryProduto.Filtered:=false;}
 end;
 
 procedure TfrmCadProduto.btnIncluiClick(Sender: TObject);
@@ -92,7 +92,6 @@ end;
 
 procedure TfrmCadProduto.btnSalvaClick(Sender: TObject);
 begin
-  //ShowMessage(edtDescricao.Text);
   actSalvar.Execute;
 end;
 

@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, uPrincipal, uFormPadrao, uDtmGlobal, uCadProduto, uPesquisa
+  Forms, uPrincipal, uFormPadrao, uDtmGlobal, uCadProduto, uPesquisa, uLanPedidoVenda
   { you can add units after this };
 
 {$R *.res}
@@ -20,6 +20,7 @@ begin
   Application.CreateForm(TdtmGlobal, dtmGlobal);
   Application.CreateForm(TfrmCadProduto, frmCadProduto);
   Application.CreateForm(TfrmPesquisa, frmPesquisa);
+  Application.CreateForm(TfrmPadrao1, frmPadrao1);
   Application.Run;
 end.
 

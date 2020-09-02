@@ -1,0 +1,315 @@
+inherited frmPadrao1: TfrmPadrao1
+  Left = 186
+  Top = 102
+  inherited Panel1: TPanel
+    Caption = 'Pedido de Venda'
+  end
+  inherited Panel2: TPanel
+    Height = 511
+    ClientHeight = 511
+    inherited btnSalva: TImage
+      Top = 363
+    end
+    inherited btnCancela: TImage
+      Top = 432
+    end
+  end
+  object grpPedido: TGroupBox[2]
+    Left = 90
+    Height = 74
+    Top = 47
+    Width = 725
+    Anchors = [akTop, akLeft, akRight]
+    ClientHeight = 54
+    ClientWidth = 721
+    TabOrder = 2
+    object Label1: TLabel
+      Left = 12
+      Height = 15
+      Top = 17
+      Width = 37
+      Caption = 'Código'
+      FocusControl = edtCodigo
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 51
+      Height = 15
+      Top = 17
+      Width = 54
+      Caption = 'Referência'
+      FocusControl = edtReferencia
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 191
+      Height = 15
+      Top = 17
+      Width = 82
+      Caption = 'Número Pedido'
+      FocusControl = edtNumeroPedido
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 300
+      Height = 15
+      Top = 8
+      Width = 57
+      Caption = 'Data Emissão'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 408
+      Height = 15
+      Top = 17
+      Width = 62
+      Caption = 'Tipo operação'
+      FocusControl = edtTipoOperacao
+      ParentColor = False
+    end
+    object Label7: TLabel
+      Left = 168
+      Height = 15
+      Top = 360
+      Width = 67
+      Caption = 'Total Pedido'
+      FocusControl = DBEdit7
+      ParentColor = False
+    end
+    object edtCodigo: TDBEdit
+      Left = 12
+      Height = 23
+      Top = 35
+      Width = 33
+      DataField = 'CODPEDIDO'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+    end
+    object edtReferencia: TDBEdit
+      Left = 51
+      Height = 23
+      Top = 35
+      Width = 134
+      DataField = 'REFERENCIA'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 1
+    end
+    object edtNumeroPedido: TDBEdit
+      Left = 191
+      Height = 23
+      Top = 35
+      Width = 72
+      DataField = 'NUMEROPEDIDO'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 2
+    end
+    object edtTipoOperacao: TDBEdit
+      Left = 408
+      Height = 23
+      Top = 36
+      Width = 29
+      DataField = 'TIPOPERACAO'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 3
+    end
+    object DBEdit7: TDBEdit
+      Left = 168
+      Height = 23
+      Top = 376
+      Width = 251
+      DataField = 'TOTALPEDIDO'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 4
+    end
+  end
+  object GroupBox1: TGroupBox[3]
+    Left = 90
+    Height = 60
+    Top = 127
+    Width = 725
+    Anchors = [akTop, akLeft, akRight]
+    Caption = 'Dados Cliente'
+    ClientHeight = 40
+    ClientWidth = 721
+    TabOrder = 3
+    object Label5: TLabel
+      Left = 13
+      Height = 15
+      Top = 15
+      Width = 77
+      Caption = 'Código Cliente'
+      ParentColor = False
+    end
+    object edtCodigoCliente: TDBEdit
+      Left = 13
+      Height = 23
+      Top = 30
+      Width = 134
+      DataField = 'CODIGOCLIENTE'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+    end
+  end
+  object grpProduto: TGroupBox[4]
+    Left = 90
+    Height = 124
+    Top = 193
+    Width = 725
+    Caption = 'Dados Produto'
+    ClientHeight = 104
+    ClientWidth = 721
+    TabOrder = 4
+    object Label8: TLabel
+      Left = 13
+      Height = 15
+      Top = 17
+      Width = 83
+      Caption = 'Código Produto'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      Left = 124
+      Height = 15
+      Top = 17
+      Width = 37
+      Caption = 'Descrição'
+      ParentColor = False
+    end
+    object Label10: TLabel
+      Left = 13
+      Height = 15
+      Top = 63
+      Width = 71
+      Caption = 'Valor Unitário'
+      ParentColor = False
+    end
+    object Label11: TLabel
+      Left = 104
+      Height = 15
+      Top = 63
+      Width = 62
+      Caption = 'Quantidade'
+      ParentColor = False
+    end
+    object Label12: TLabel
+      Left = 185
+      Height = 15
+      Top = 63
+      Width = 57
+      Caption = 'Valor Total'
+      ParentColor = False
+    end
+    object Image2: TImage
+      Cursor = crHandPoint
+      Left = 300
+      Height = 25
+      Hint = 'Excluir'
+      Top = 77
+      Width = 25
+      Align = alCustom
+      ParentShowHint = False
+      ShowHint = True
+      Stretch = True
+    end
+    object btnGravarProduto: TImage
+      Cursor = crHandPoint
+      Left = 269
+      Height = 25
+      Hint = 'Salvar'
+      Top = 77
+      Width = 25
+      Align = alCustom
+      ParentShowHint = False
+      ShowHint = True
+      Stretch = True
+    end
+    object btnPesquisaProduto: TImage
+      Cursor = crHandPoint
+      Left = 93
+      Height = 25
+      Hint = 'Inserir'
+      Top = 32
+      Width = 25
+      Align = alCustom
+      ParentShowHint = False
+      ShowHint = True
+      Stretch = True
+    end
+    object edtDesProduto: TEdit
+      Left = 124
+      Height = 23
+      Top = 36
+      Width = 509
+      TabOrder = 0
+    end
+    object edtCodigoProduto: TEdit
+      Left = 13
+      Height = 23
+      Top = 36
+      Width = 74
+      TabOrder = 1
+    end
+    object edtValorUnitario: TEdit
+      Left = 13
+      Height = 23
+      Top = 82
+      Width = 74
+      TabOrder = 2
+    end
+    object edtQuantidade: TEdit
+      Left = 104
+      Height = 23
+      Top = 82
+      Width = 74
+      TabOrder = 3
+    end
+    object edtValorTotal: TEdit
+      Left = 184
+      Height = 23
+      Top = 82
+      Width = 74
+      TabOrder = 4
+    end
+  end
+  object grdProdutos: TDBGrid[5]
+    Left = 90
+    Height = 221
+    Top = 323
+    Width = 725
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clWindow
+    Columns = <>
+    Enabled = False
+    TabOrder = 5
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+  end
+  object Panel3: TPanel[6]
+    Left = 0
+    Height = 48
+    Top = 552
+    Width = 815
+    Align = alBottom
+    BevelOuter = bvNone
+    Color = clSkyBlue
+    ParentColor = False
+    TabOrder = 6
+  end
+  inherited ActionList1: TActionList[7]
+  end
+  inherited dsPadrao: TDataSource[8]
+  end
+end
