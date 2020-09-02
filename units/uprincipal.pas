@@ -1,0 +1,187 @@
+unit uPrincipal;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls;
+
+type
+
+  { TfrmPrincipal }
+
+  TfrmPrincipal = class(TForm)
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    pnpCada: TPanel;
+    pnpCadastros: TPanel;
+    pnpCadClientes: TPanel;
+    pnpCadProdutos: TPanel;
+    pnpPedidoCompra: TPanel;
+    pnpPedidoVenda: TPanel;
+    pnpPrincipal: TPanel;
+    pnpSair: TPanel;
+    pnpTitulo: TPanel;
+    pnpVoltar: TPanel;
+    procedure pnpCadaClick(Sender: TObject);
+    procedure pnpCadProdutosClick(Sender: TObject);
+    procedure pnpSairClick(Sender: TObject);
+    procedure pnpVoltarClick(Sender: TObject);
+  private
+    procedure selecionaMenu(nMenu: Integer);
+  public
+
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+uses uCadProduto;
+
+{$R *.lfm}
+
+{ TfrmPrincipal }
+
+procedure TfrmPrincipal.pnpCadaClick(Sender: TObject);
+begin
+  selecionaMenu(2);
+end;
+
+procedure TfrmPrincipal.pnpCadProdutosClick(Sender: TObject);
+begin
+  try
+   frmCadProduto := TfrmCadProduto.Create(self);
+   frmCadProduto.ShowModal
+  finally
+    FreeAndNil(frmCadProduto);
+  end;
+end;
+procedure TfrmPrincipal.pnpSairClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmPrincipal.pnpVoltarClick(Sender: TObject);
+begin
+  selecionaMenu(1);
+end;
+
+procedure TfrmPrincipal.selecionaMenu(nMenu: Integer);
+begin
+  if nMenu = 0  then     //esconde menu
+  begin
+    pnpPrincipal.Visible := False;
+    pnpCadastros.Visible := False;
+  end
+  else if nMenu = 1  then     //mostra menu principal
+  begin
+    pnpPrincipal.Visible := true;
+    pnpCadastros.Visible := False;
+  end
+  else if nMenu  = 2 then //mostra menu cadastros
+  begin
+    pnpPrincipal.Visible := false;
+    pnpCadastros.Visible := true;
+  end;
+end;
+
+
+end.
+unit uPrincipal;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls;
+
+type
+
+  { TfrmPrincipal }
+
+  TfrmPrincipal = class(TForm)
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image7: TImage;
+    Image8: TImage;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    pnpCada: TPanel;
+    pnpCadastros: TPanel;
+    pnpCadClientes: TPanel;
+    pnpCadProdutos: TPanel;
+    pnpPedidoCompra: TPanel;
+    pnpPedidoVenda: TPanel;
+    pnpPrincipal: TPanel;
+    pnpSair: TPanel;
+    pnpTitulo: TPanel;
+    pnpVoltar: TPanel;
+    procedure pnpCadaClick(Sender: TObject);
+    procedure pnpSairClick(Sender: TObject);
+    procedure pnpVoltarClick(Sender: TObject);
+  private
+    procedure selecionaMenu(nMenu: Integer);
+  public
+
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.lfm}
+
+{ TfrmPrincipal }
+
+procedure TfrmPrincipal.pnpCadaClick(Sender: TObject);
+begin
+  selecionaMenu(2);
+end;
+
+procedure TfrmPrincipal.pnpSairClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmPrincipal.pnpVoltarClick(Sender: TObject);
+begin
+  selecionaMenu(1);
+end;
+
+procedure TfrmPrincipal.selecionaMenu(nMenu: Integer);
+begin
+  if nMenu = 0  then     //esconde menu
+  begin
+    pnpPrincipal.Visible := False;
+    pnpCadastros.Visible := False;
+  end
+  else if nMenu = 1  then     //mostra menu principal
+  begin
+    pnpPrincipal.Visible := true;
+    pnpCadastros.Visible := False;
+  end
+  else if nMenu  = 2 then //mostra menu cadastros
+  begin
+    pnpPrincipal.Visible := false;
+    pnpCadastros.Visible := true;
+  end;
+end;
+
+
+end.
+

@@ -1,0 +1,132 @@
+object dtmGlobal: TdtmGlobal
+  OldCreateOrder = False
+  Height = 247
+  HorizontalOffset = 572
+  VerticalOffset = 199
+  Width = 360
+  PPI = 96
+  object conexao: TIBConnection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'H:\GitHub\ProjetoDelphi\PROJETO.FDB'
+    KeepConnection = True
+    Password = 'masterkey'
+    Transaction = transConexao
+    UserName = 'sysdba'
+    CharSet = 'UTF8'
+    CheckTransactionParams = False
+    left = 40
+    top = 32
+  end
+  object transConexao: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 120
+    top = 32
+  end
+  object qryProduto: TSQLQuery
+    PacketRecords = -1
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'CODPRODUTO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'SITUACAO'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 1
+      end>
+    Database = conexao
+    Transaction = transConexao
+    SQL.Strings = (
+      'select * from produto'
+    )
+    InsertSQL.Strings = (
+      'insert into produto'
+      '  (CODPRODUTO,DESCRICAO)'
+      'values'
+      '  (:CODPRODUTO,:DESCRICAO)'
+      ''
+    )
+    UpdateSQL.Strings = (
+      'update produto'
+      'set'
+      '  DESCRICAO = :DESCRICAO,'
+      '  SITUACAO = :SITUACAO'
+      'where'
+      '  CODPRODUTO = :OLD_CODPRODUTO'
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from produto'
+      'where'
+      '  CODPRODUTO = :OLD_CODPRODUTO'
+      ''
+    )
+    RefreshSQL.Strings = (
+      'Select *'
+      'from produto'
+      'where'
+      '  CODPRODUTO = :CODPRODUTO'
+      ''
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
+    Params = <>
+    Sequence.FieldName = 'CODPRODUTO'
+    Sequence.SequenceName = 'GEN_CODPRODUTO'
+    Sequence.ApplyEvent = saeOnPost
+    left = 46
+    top = 112
+    object qryProdutoCODPRODUTO: TLongintField
+      DisplayLabel = 'Código'
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'CODPRODUTO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryProdutoDESCRICAO: TStringField
+      DisplayLabel = 'Descrição'
+      DisplayWidth = 50
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 100
+    end
+    object qryProdutoSITUACAO: TStringField
+      DisplayLabel = 'Situação'
+      FieldKind = fkData
+      FieldName = 'SITUACAO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+  end
+  object transProduto: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 120
+    top = 112
+  end
+end
