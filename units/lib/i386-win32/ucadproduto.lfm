@@ -2,6 +2,7 @@ inherited frmCadProduto: TfrmCadProduto
   Left = 507
   Top = 145
   OnShow = FormShow
+  Position = poDesigned
   inherited Panel1: TPanel
     Caption = 'Cadastro de Produtos'
   end

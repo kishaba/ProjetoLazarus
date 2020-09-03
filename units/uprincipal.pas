@@ -33,6 +33,7 @@ type
     pnpVoltar: TPanel;
     procedure pnpCadaClick(Sender: TObject);
     procedure pnpCadProdutosClick(Sender: TObject);
+    procedure pnpPedidoVendaClick(Sender: TObject);
     procedure pnpSairClick(Sender: TObject);
     procedure pnpVoltarClick(Sender: TObject);
   private
@@ -46,7 +47,7 @@ var
 
 implementation
 
-uses uCadProduto;
+uses uCadProduto,uLanPedidoVenda;
 
 {$R *.lfm}
 
@@ -66,6 +67,17 @@ begin
     FreeAndNil(frmCadProduto);
   end;
 end;
+
+procedure TfrmPrincipal.pnpPedidoVendaClick(Sender: TObject);
+begin
+  try
+   frmLanPedidoVenda := TfrmLanPedidoVenda.Create(self);
+   frmLanPedidoVenda.ShowModal
+  finally
+    FreeAndNil(frmLanPedidoVenda);
+  end;
+end;
+
 procedure TfrmPrincipal.pnpSairClick(Sender: TObject);
 begin
   Application.Terminate;

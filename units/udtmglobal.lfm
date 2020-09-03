@@ -1,12 +1,12 @@
 object dtmGlobal: TdtmGlobal
   OldCreateOrder = False
-  Height = 247
-  HorizontalOffset = 572
-  VerticalOffset = 199
-  Width = 360
+  Height = 350
+  HorizontalOffset = 438
+  VerticalOffset = 206
+  Width = 693
   PPI = 96
   object conexao: TIBConnection
-    Connected = False
+    Connected = True
     LoginPrompt = False
     DatabaseName = 'H:\GitHub\ProjetoDelphi\PROJETO.FDB'
     KeepConnection = True
@@ -19,7 +19,7 @@ object dtmGlobal: TdtmGlobal
     top = 32
   end
   object transConexao: TSQLTransaction
-    Active = False
+    Active = True
     Action = caCommitRetaining
     Database = conexao
     left = 120
@@ -27,7 +27,6 @@ object dtmGlobal: TdtmGlobal
   end
   object qryProduto: TSQLQuery
     PacketRecords = -1
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'CODPRODUTO'
@@ -47,7 +46,7 @@ object dtmGlobal: TdtmGlobal
         Size = 1
       end>
     Database = conexao
-    Transaction = transConexao
+    Transaction = transPedido
     SQL.Strings = (
       'select * from produto'
     )
@@ -85,8 +84,8 @@ object dtmGlobal: TdtmGlobal
     Sequence.FieldName = 'CODPRODUTO'
     Sequence.SequenceName = 'GEN_CODPRODUTO'
     Sequence.ApplyEvent = saeOnPost
-    left = 46
-    top = 112
+    left = 40
+    top = 88
     object qryProdutoCODPRODUTO: TLongintField
       DisplayLabel = 'Código'
       DisplayWidth = 5
@@ -127,6 +126,609 @@ object dtmGlobal: TdtmGlobal
     Action = caCommitRetaining
     Database = conexao
     left = 120
-    top = 112
+    top = 88
+  end
+  object qryPedido: TSQLQuery
+    PacketRecords = -1
+    IndexName = 'DEFAULT_ORDER'
+    FieldDefs = <    
+      item
+        Name = 'CODPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'REFERENCIA'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'NUMEROPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DATAEMISSAO'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'CODIGOCLIENTE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'TIPOPERACAO'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 1
+      end    
+      item
+        Name = 'TOTALPEDIDO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end>
+    Database = conexao
+    Transaction = transPedido
+    SQL.Strings = (
+      'select * from PEDIDO'
+    )
+    InsertSQL.Strings = (
+      'insert into PEDIDO'
+      '  (CODPEDIDO,REFERENCIA, NUMEROPEDIDO, DATAEMISSAO, CODIGOCLIENTE, TIPOPERACAO, TOTALPEDIDO)'
+      'values'
+      '  (:CODPEDIDO,:REFERENCIA, :NUMEROPEDIDO, :DATAEMISSAO, :CODIGOCLIENTE, :TIPOPERACAO,'
+      '   :TOTALPEDIDO)'
+      ''
+    )
+    UpdateSQL.Strings = (
+      'update PEDIDO'
+      'set'
+      '  REFERENCIA = :REFERENCIA,'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO,'
+      '  DATAEMISSAO = :DATAEMISSAO,'
+      '  CODIGOCLIENTE = :CODIGOCLIENTE,'
+      '  TIPOPERACAO = :TIPOPERACAO,'
+      '  TOTALPEDIDO = :TOTALPEDIDO'
+      'where'
+      '  CODPEDIDO = :OLD_CODPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO'
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from PEDIDO'
+      'where'
+      '  CODPEDIDO = :OLD_CODPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO'
+      ''
+    )
+    RefreshSQL.Strings = (
+      'Select'
+      '  CODPEDIDO,'
+      '  REFERENCIA,'
+      '  NUMEROPEDIDO,'
+      '  DATAEMISSAO,'
+      '  CODIGOCLIENTE,'
+      '  TIPOPERACAO,'
+      '  TOTALPEDIDO'
+      'from PEDIDO'
+      'where'
+      '  CODPEDIDO = :CODPEDIDO and'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO'
+      ''
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
+    Params = <>
+    Sequence.FieldName = 'CODPEDIDO'
+    Sequence.SequenceName = 'GEN_CODPEDIDO'
+    Sequence.ApplyEvent = saeOnPost
+    left = 40
+    top = 152
+    object qryPedidoCODPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPEDIDO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryPedidoREFERENCIA: TStringField
+      FieldKind = fkData
+      FieldName = 'REFERENCIA'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 10
+    end
+    object qryPedidoNUMEROPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'NUMEROPEDIDO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryPedidoDATAEMISSAO: TDateField
+      FieldKind = fkData
+      FieldName = 'DATAEMISSAO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryPedidoCODIGOCLIENTE: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGOCLIENTE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryPedidoTIPOPERACAO: TStringField
+      FieldKind = fkData
+      FieldName = 'TIPOPERACAO'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+    object qryPedidoTOTALPEDIDO: TBCDField
+      FieldKind = fkData
+      FieldName = 'TOTALPEDIDO'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+  end
+  object transPedido: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 120
+    top = 152
+  end
+  object qryConsultaPedido: TSQLQuery
+    PacketRecords = -1
+    FieldDefs = <    
+      item
+        Name = 'CODPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'REFERENCIA'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'NUMEROPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DATAEMISSAO'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'CODIGOCLIENTE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'TIPOPERACAO'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 1
+      end    
+      item
+        Name = 'TOTALPEDIDO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end>
+    Database = conexao
+    Transaction = transConsultaPedido
+    SQL.Strings = (
+      'select * from PEDIDO where pedido.codpedido = :codpedido'
+    )
+    InsertSQL.Strings = (
+      ''
+    )
+    UpdateSQL.Strings = (
+      ''
+    )
+    DeleteSQL.Strings = (
+      ''
+    )
+    RefreshSQL.Strings = (
+      ''
+      ''
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'codpedido'
+        ParamType = ptInput
+      end>
+    Sequence.FieldName = 'CODPEDIDO'
+    Sequence.SequenceName = 'GEN_CODPEDIDO'
+    Sequence.ApplyEvent = saeOnPost
+    left = 40
+    top = 216
+    object qryConsultaPedidoCODPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPEDIDO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryConsultaPedidoREFERENCIA: TStringField
+      FieldKind = fkData
+      FieldName = 'REFERENCIA'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 10
+    end
+    object qryConsultaPedidoNUMEROPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'NUMEROPEDIDO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryConsultaPedidoDATAEMISSAO: TDateField
+      FieldKind = fkData
+      FieldName = 'DATAEMISSAO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryConsultaPedidoCODIGOCLIENTE: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGOCLIENTE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryConsultaPedidoTIPOPERACAO: TStringField
+      FieldKind = fkData
+      FieldName = 'TIPOPERACAO'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+    object qryConsultaPedidoTOTALPEDIDO: TBCDField
+      FieldKind = fkData
+      FieldName = 'TOTALPEDIDO'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+  end
+  object transConsultaPedido: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 152
+    top = 216
+  end
+  object qryItemPedido: TSQLQuery
+    PacketRecords = -1
+    FieldDefs = <    
+      item
+        Name = 'ITEMPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'CODPRODUTO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'QUANTIDADE'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end    
+      item
+        Name = 'VALORUNITARIO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end    
+      item
+        Name = 'VALORTOTALITEM'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end>
+    Database = conexao
+    Transaction = transItemPedido
+    SQL.Strings = (
+      'select itempedido.itempedido,'
+      '       itempedido.codproduto,'
+      '       produto.descricao,'
+      '       itempedido.quantidade,'
+      '       itempedido.valorunitario,'
+      '       itempedido.valortotalitem'
+      'from   itempedido join produto on (itempedido.codproduto = produto.codproduto)'
+      'where  itempedido.numeropedido = :numeropedido'
+      'and    itempedido.codpedido    = :codpedido'
+      ''
+    )
+    InsertSQL.Strings = (
+      'insert into ITEMPEDIDO'
+      '  (CODPEDIDO,NUMEROPEDIDO,ITEMPEDIDO,CODPRODUTO, QUANTIDADE, VALORUNITARIO, VALORTOTALITEM)'
+      'values'
+      '  (:CODPEDIDO,:NUMEROPEDIDO,:ITEMPEDIDO,:CODPRODUTO, :QUANTIDADE, :VALORUNITARIO, :VALORTOTALITEM)'
+      ''
+    )
+    UpdateSQL.Strings = (
+      'update itempedido'
+      'set'
+      '  CODPRODUTO = :CODPRODUTO,'
+      '  DESCRICAO = :DESCRICAO,'
+      '  QUANTIDADE = :QUANTIDADE,'
+      '  VALORUNITARIO = :VALORUNITARIO,'
+      '  VALORTOTALITEM = :VALORTOTALITEM'
+      'where'
+      '  ITEMPEDIDO = :OLD_ITEMPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO and'
+      '  CODPEDIDO = :OLD_CODPEDIDO'
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from itempedido'
+      'where'
+      '  ITEMPEDIDO = :OLD_ITEMPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO and'
+      '  CODPEDIDO = :OLD_CODPEDIDO'
+      ''
+    )
+    RefreshSQL.Strings = (
+      'Select *'
+      'from itempedido'
+      'where'
+      '  ITEMPEDIDO = :ITEMPEDIDO and'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO and'
+      '  CODPEDIDO = :CODPEDIDO'
+      ''
+      ''
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'numeropedido'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'codpedido'
+        ParamType = ptInput
+      end>
+    Sequence.ApplyEvent = saeOnPost
+    left = 216
+    top = 32
+    object qryItemPedidoITEMPEDIDO: TLongintField
+      DisplayWidth = 3
+      FieldKind = fkData
+      FieldName = 'ITEMPEDIDO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryItemPedidoCODPRODUTO: TLongintField
+      DisplayLabel = 'Código Produto'
+      DisplayWidth = 3
+      FieldKind = fkData
+      FieldName = 'CODPRODUTO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryItemPedidoDESCRICAO: TStringField
+      DisplayLabel = 'Descrição'
+      DisplayWidth = 25
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 100
+    end
+    object qryItemPedidoQUANTIDADE: TBCDField
+      DisplayLabel = 'Quantidade'
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'QUANTIDADE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+    object qryItemPedidoVALORUNITARIO: TBCDField
+      DisplayLabel = 'Valor Unitário'
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'VALORUNITARIO'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+    object qryItemPedidoVALORTOTALITEM: TBCDField
+      DisplayLabel = 'Valor Total Item'
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'VALORTOTALITEM'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+  end
+  object transItemPedido: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 304
+    top = 32
+  end
+  object transConsultaProduto: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 352
+    top = 88
+  end
+  object qryBuscaProduto: TSQLQuery
+    PacketRecords = -1
+    FieldDefs = <    
+      item
+        Name = 'CODPRODUTO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'SITUACAO'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 1
+      end>
+    Database = conexao
+    Transaction = transConexao
+    SQL.Strings = (
+      'select * from produto'
+      'where produto.codproduto = :codproduto'
+      ''
+    )
+    InsertSQL.Strings = (
+      ''
+    )
+    UpdateSQL.Strings = (
+      ''
+    )
+    DeleteSQL.Strings = (
+      ''
+    )
+    RefreshSQL.Strings = (
+      ''
+      ''
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'codproduto'
+        ParamType = ptInput
+      end>
+    Sequence.FieldName = 'CODPEDIDO'
+    Sequence.SequenceName = 'GEN_CODPEDIDO'
+    Sequence.ApplyEvent = saeOnPost
+    left = 224
+    top = 88
+    object qryBuscaProdutoCODPRODUTO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPRODUTO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryBuscaProdutoDESCRICAO: TStringField
+      FieldKind = fkData
+      FieldName = 'DESCRICAO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 100
+    end
+    object qryBuscaProdutoSITUACAO: TStringField
+      FieldKind = fkData
+      FieldName = 'SITUACAO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
   end
 end

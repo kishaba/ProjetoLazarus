@@ -162,12 +162,13 @@ object frmPesquisa: TfrmPesquisa
   object DBGrid1: TDBGrid
     Cursor = crHandPoint
     Left = 0
-    Height = 872
-    Top = 128
+    Height = 912
+    Top = 88
     Width = 881
     Anchors = [akTop, akLeft, akRight]
     Color = clWindow
     Columns = <>
+    DataSource = dtsPesquisa
     TabOrder = 5
     TitleFont.Color = clWindowText
     TitleFont.Height = -11

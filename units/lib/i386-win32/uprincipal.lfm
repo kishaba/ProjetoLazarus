@@ -175,6 +175,7 @@ object frmPrincipal: TfrmPrincipal
       ParentColor = False
       ParentFont = False
       TabOrder = 2
+      OnClick = pnpPedidoVendaClick
       object Image1: TImage
         Left = 0
         Height = 64
