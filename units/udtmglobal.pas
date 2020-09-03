@@ -55,9 +55,11 @@ type
     transItemPedido: TSQLTransaction;
     transProduto: TSQLTransaction;
     transPedido: TSQLTransaction;
+    procedure DataModuleCreate(Sender: TObject);
     procedure qryItemPedidoAfterPost(DataSet: TDataSet);
     procedure qryPedidoAfterDelete(DataSet: TDataSet);
     procedure qryPedidoAfterPost(DataSet: TDataSet);
+    procedure qryProdutoAfterPost(DataSet: TDataSet);
   private
 
   public
@@ -79,6 +81,16 @@ begin
   transBuscaProximoItem.Active:=False;
 end;
 
+procedure TdtmGlobal.DataModuleCreate(Sender: TObject);
+begin
+  qryProduto.Transaction:=transProduto;
+  qryPedido.Transaction:=transPedido;
+  qryItemPedido.Transaction:=transItemPedido;
+  qryConsultaPedido.Transaction:=transConsultaPedido;
+  qryBuscaProximoItemPedido.Transaction:=transConsultaProduto;
+  qryBuscaProduto.Transaction:=transBuscaProximoItem;
+end;
+
 procedure TdtmGlobal.qryPedidoAfterDelete(DataSet: TDataSet);
 begin
   qryPedido.ApplyUpdates;
@@ -89,6 +101,12 @@ procedure TdtmGlobal.qryPedidoAfterPost(DataSet: TDataSet);
 begin
   qryPedido.ApplyUpdates;
   transPedido.Active:=False;
+end;
+
+procedure TdtmGlobal.qryProdutoAfterPost(DataSet: TDataSet);
+begin
+  qryProduto.ApplyUpdates;
+  transProduto.Active:=False;
 end;
 
 end.

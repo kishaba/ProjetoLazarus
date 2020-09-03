@@ -1,4 +1,5 @@
 object dtmGlobal: TdtmGlobal
+  OnCreate = DataModuleCreate
   OldCreateOrder = False
   Height = 350
   HorizontalOffset = 438
@@ -45,8 +46,9 @@ object dtmGlobal: TdtmGlobal
         Precision = -1
         Size = 1
       end>
+    AfterPost = qryProdutoAfterPost
     Database = conexao
-    Transaction = transPedido
+    Transaction = transProduto
     SQL.Strings = (
       'select * from produto'
     )

@@ -69,6 +69,7 @@ type
     function TiraMascaraFloat(sValor: string): string;
     procedure CalculaTotais;
     procedure TotalizaPedido;
+    procedure limpacampos;
 
   public
     fTotal: currency;
@@ -178,22 +179,42 @@ begin
   lblValorTotal.Caption := FormatFloat('#,##0.00', ftotal);
 end;
 
+procedure TfrmLanPedidoVenda.limpacampos;
+var i: integer;
+begin
+  for I := 0 to ComponentCount-1 do
+  begin
+    if Components[i] is TDBEdit then
+    begin
+      TDBEdit(Components[i]).Text    := '';
+    end
+    else if Components[i] is TEdit then
+    begin
+      TDBComboBox(Components[i]).Text    := '';
+    end;
+  end;
+end;
+
 procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
 begin
   dsPadrao.DataSet.FieldByName('DATAEMISSAO').AsDateTime := edtData.Date;
   inherited;
+  grpProduto.Enabled:=true;
 end;
 
 procedure TfrmLanPedidoVenda.actEditaExecute(Sender: TObject);
 begin
   inherited;
   edtCodigo.Enabled:=False;
+  grpProduto.Enabled:=False;
 end;
 
 procedure TfrmLanPedidoVenda.actIncluirExecute(Sender: TObject);
 begin
   inherited;
   dsItens.DataSet.close;
+  grpProduto.Enabled:=False;
+  limpacampos;
 end;
 
 procedure TfrmLanPedidoVenda.btnBuscaPedidoClick(Sender: TObject);
@@ -206,6 +227,7 @@ begin
       edtCodigo.Text := frmPesquisa.edtRetorno.Text;
       BuscaPedido(StrToInt(frmPesquisa.edtRetorno.Text));
       TotalizaPedido;
+      grpProduto.Enabled:=true;
     end
     else
       edtCodigo.Clear;
@@ -228,7 +250,7 @@ procedure TfrmLanPedidoVenda.btnGravarProdutoClick(Sender: TObject);
 begin
   dsItens.DataSet.Open;
   dtmGlobal.qryItemPedido.Close;
-  dtmGlobal.qryItemPedido.Open;
+
   dsItens.DataSet.Open;
   dsItens.DataSet.Insert;
   dtmGlobal.qryItemPedidoCODPEDIDO.AsInteger := StrToInt(edtCodigo.Text);
@@ -247,8 +269,8 @@ begin
   dtmGlobal.qryBuscaProximoItemPedido.Open;
 
   // ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
-  dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger :=
-    dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
+  dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger :=dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
+    dtmGlobal.qryItemPedido.Open;
   dsItens.DataSet.post;
   dtmglobal.transItemPedido.CommitRetaining;
   TotalizaPedido;
@@ -256,7 +278,6 @@ begin
   dtmGlobal.transBuscaProximoItem.Active:=False; }
 
 end;
-
 
 procedure TfrmLanPedidoVenda.btnPesquisaProdutoClick(Sender: TObject);
 begin

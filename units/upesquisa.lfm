@@ -1,10 +1,10 @@
 object frmPesquisa: TfrmPesquisa
   Left = 467
-  Height = 346
-  Top = 118
+  Height = 379
+  Top = 132
   Width = 584
   Caption = 'frmPesquisa'
-  ClientHeight = 346
+  ClientHeight = 379
   ClientWidth = 584
   OnShow = FormShow
   LCLVersion = '1.8.2.0'
@@ -161,10 +161,10 @@ object frmPesquisa: TfrmPesquisa
   end
   object DBGrid1: TDBGrid
     Cursor = crHandPoint
-    Left = 0
-    Height = 912
-    Top = 88
-    Width = 881
+    Left = 8
+    Height = 288
+    Top = 80
+    Width = 777
     Anchors = [akTop, akLeft, akRight]
     Color = clWindow
     Columns = <>
@@ -178,7 +178,7 @@ object frmPesquisa: TfrmPesquisa
   object qrySql: TSQLQuery
     FieldDefs = <>
     Database = dtmGlobal.conexao
-    Transaction = dtmGlobal.transConexao
+    Transaction = transSQl
     Params = <>
     left = 344
     top = 88

@@ -44,6 +44,7 @@ implementation
 
 procedure TfrmPesquisa.btnPesquisaClick(Sender: TObject);
 begin
+  transSQl.Active:=false;
   if qrySql.Active then
      qrySql.Close;
   with qrySql.SQL do
@@ -82,6 +83,8 @@ var
 begin
   inherited Create(AOwner);
   // Conexao.Open;
+  qrySql.Close;
+  transSQl.Active:=false;
   cCampoRetorno := par_cCampoResult;
   cCampos := '';
   cbCampos.Clear;
