@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, DBDateTimePicker, DateTimePicker, Forms,
-  Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ActnList, DbCtrls, DBGrids,
-  uFormPadrao, db,sqldb;
+  Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ActnList, DBCtrls, DBGrids,
+  uFormPadrao, DB, sqldb, LCLType;
 
 type
 
@@ -34,7 +34,7 @@ type
     frmLanPedidoVenda: TGroupBox;
     grpPedido: TGroupBox;
     grpProduto: TGroupBox;
-    Image2: TImage;
+    btnExcluirProduto: TImage;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -50,18 +50,28 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Panel3: TPanel;
+    procedure actEditaExecute(Sender: TObject);
+    procedure actIncluirExecute(Sender: TObject);
     procedure actSalvarExecute(Sender: TObject);
     procedure btnBuscaPedidoClick(Sender: TObject);
+    procedure btnExcluirProdutoClick(Sender: TObject);
     procedure btnGravarProdutoClick(Sender: TObject);
     procedure btnPesquisaProdutoClick(Sender: TObject);
+    procedure edtQuantidadeChange(Sender: TObject);
+    procedure edtQuantidadeKeyPress(Sender: TObject; var Key: char);
+    procedure edtValorUnitarioChange(Sender: TObject);
+    procedure edtValorUnitarioKeyPress(Sender: TObject; var Key: char);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
   private
-    procedure BuscaPedido(CodPedido: Integer);
-    procedure BuscaProduto(CodProduto: Integer);
+    procedure BuscaPedido(CodPedido: integer);
+    procedure BuscaProduto(CodProduto: integer);
+    function TiraMascaraFloat(sValor: string): string;
+    procedure CalculaTotais;
+    procedure TotalizaPedido;
 
   public
-    fTotal : CURRENCY;
+    fTotal: currency;
   end;
 
 var
@@ -71,16 +81,16 @@ implementation
 
 {$R *.lfm}
 uses
-  uPesquisa,uDtmGlobal;
+  uPesquisa, uDtmGlobal;
 
 { TfrmLanPedidoVenda }
 
 procedure TfrmLanPedidoVenda.FormShow(Sender: TObject);
 begin
-  edtData.Date:= now;
+  edtData.Date := now;
 end;
 
-procedure TfrmLanPedidoVenda.BuscaPedido(CodPedido: Integer);
+procedure TfrmLanPedidoVenda.BuscaPedido(CodPedido: integer);
 begin
   dtmGlobal.qryConsultaPedido.Close;
   dtmGlobal.qryConsultaPedido.ParamByName('codpedido').AsInteger := CodPedido;
@@ -93,25 +103,26 @@ begin
   edtCodigoCliente.Text := dtmGlobal.qryConsultaPedidoCODIGOCLIENTE.AsString;
   if edtNumeroPedido.Text <> '' then
   begin
-    grdProdutos.Enabled := true;
-    edtCodigoProduto.Enabled := true;
-    edtValorUnitario.Enabled := true;
-    edtQuantidade.Enabled := true;
+    grdProdutos.Enabled := True;
+    edtCodigoProduto.Enabled := True;
+    edtValorUnitario.Enabled := True;
+    edtQuantidade.Enabled := True;
     dsItens.DataSet.Open;
     dtmGlobal.qryItemPedido.Close;
-    dtmGlobal.qryItemPedido.ParamByName('codpedido').AsInteger    := dtmGlobal.qryConsultaPedidoCODPEDIDO.AsInteger;
-    dtmGlobal.qryItemPedido.ParamByName('numeropedido').AsInteger := dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
+    dtmGlobal.qryItemPedido.ParamByName('codpedido').AsInteger :=
+      dtmGlobal.qryConsultaPedidoCODPEDIDO.AsInteger;
+    dtmGlobal.qryItemPedido.ParamByName('numeropedido').AsInteger :=
+      dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
     dtmGlobal.qryItemPedido.Open;
   end;
 end;
 
-procedure TfrmLanPedidoVenda.BuscaProduto(CodProduto: Integer);
+procedure TfrmLanPedidoVenda.BuscaProduto(CodProduto: integer);
 begin
   dtmGlobal.qryBuscaProduto.Close;
   dtmGlobal.qryBuscaProduto.ParamByName('codproduto').AsInteger := CodProduto;
-  dtmGlobal.qryBuscaProduto.open;
-  edtDesProduto.Text := dtmGlobal.qryBuscaProduto.FieldByName
-    ('descricao').AsString;
+  dtmGlobal.qryBuscaProduto.Open;
+  edtDesProduto.Text := dtmGlobal.qryBuscaProduto.FieldByName('descricao').AsString;
   if edtDesProduto.Text <> '' then
   begin
     edtCodigoProduto.Text := IntToStr(CodProduto);
@@ -119,10 +130,70 @@ begin
   end;
 end;
 
+function TfrmLanPedidoVenda.TiraMascaraFloat(sValor: string): string;
+var
+  sAux: string;
+begin
+  if DecimalSeparator = ',' then
+    sAux := trim(StringReplace(sValor, '.', '', [rfReplaceAll]))
+  else
+    sAux := trim(StringReplace(sValor, ',', '', [rfReplaceAll]));
+  Result := sAux;
+end;
+
+procedure TfrmLanPedidoVenda.CalculaTotais;
+var
+  fQuantidade, fValorUnitario: currency;
+begin
+  inherited;
+
+  //if dsItens.State in [dsEdit, dsInsert] then
+  //begin
+  try
+    fValorUnitario := Trunc(StrToFloatDef(TiraMascaraFloat(edtValorUnitario.Text), 0));
+  except
+    fValorUnitario := 0;
+  end;
+  try
+    fQuantidade := StrToFloatDef(TiraMascaraFloat(edtQuantidade.Text), 0);
+  except
+    fQuantidade := 0;
+  end;
+
+  edtValorTotal.Text := FormatCurr('#,###,###,##0.00', fQuantidade * fValorUnitario);
+  //end;
+end;
+
+procedure TfrmLanPedidoVenda.TotalizaPedido;
+begin
+  ftotal := 0;
+  //vai pra o final da tabela
+  dtmGlobal.qryItemPedido.First;
+  while not dtmGlobal.qryItemPedido.EOF do
+  begin
+    ftotal := ftotal + dtmGlobal.qryItemPedidoVALORTOTALITEM.Value;
+    dtmGlobal.qryItemPedido.Next;
+  end;
+  //recebe o valor
+  lblValorTotal.Caption := FormatFloat('#,##0.00', ftotal);
+end;
+
 procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
 begin
   dsPadrao.DataSet.FieldByName('DATAEMISSAO').AsDateTime := edtData.Date;
   inherited;
+end;
+
+procedure TfrmLanPedidoVenda.actEditaExecute(Sender: TObject);
+begin
+  inherited;
+  edtCodigo.Enabled:=False;
+end;
+
+procedure TfrmLanPedidoVenda.actIncluirExecute(Sender: TObject);
+begin
+  inherited;
+  dsItens.DataSet.close;
 end;
 
 procedure TfrmLanPedidoVenda.btnBuscaPedidoClick(Sender: TObject);
@@ -134,6 +205,7 @@ begin
     begin
       edtCodigo.Text := frmPesquisa.edtRetorno.Text;
       BuscaPedido(StrToInt(frmPesquisa.edtRetorno.Text));
+      TotalizaPedido;
     end
     else
       edtCodigo.Clear;
@@ -142,46 +214,46 @@ begin
   end;
 end;
 
+procedure TfrmLanPedidoVenda.btnExcluirProdutoClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja mesmo excluir o item?', mtConfirmation,
+    [mbYes, mbNo], 0) = mrYes then
+  begin
+    dsItens.DataSet.Delete;
+  end;
+  TotalizaPedido;
+end;
+
 procedure TfrmLanPedidoVenda.btnGravarProdutoClick(Sender: TObject);
 begin
   dsItens.DataSet.Open;
-  dtmGlobal.qryItemPedido.Close;;
-  dtmGlobal.qryItemPedido.open;
+  dtmGlobal.qryItemPedido.Close;
+  dtmGlobal.qryItemPedido.Open;
   dsItens.DataSet.Open;
   dsItens.DataSet.Insert;
-  dtmGlobal.qryItemPedidoCODPEDIDO.AsInteger   := StrToInt(edtCodigo.Text);
-  dtmGlobal.qryItemPedidoNUMEROPEDIDO.AsInteger   := StrToInt(edtNumeroPedido.Text);
-  dtmGlobal.qryItemPedidoCODPRODUTO.AsInteger   := StrToInt(edtCodigoProduto.Text);
-  dtmGlobal.qryItemPedidoDESCRICAO.AsString    := edtDesProduto.Text;
-  dtmGlobal.qryItemPedidoQUANTIDADE.AsCurrency  := StrToCurr(edtQuantidade.Text);
+  dtmGlobal.qryItemPedidoCODPEDIDO.AsInteger := StrToInt(edtCodigo.Text);
+  dtmGlobal.qryItemPedidoNUMEROPEDIDO.AsInteger := StrToInt(edtNumeroPedido.Text);
+  dtmGlobal.qryItemPedidoCODPRODUTO.AsInteger := StrToInt(edtCodigoProduto.Text);
+  dtmGlobal.qryItemPedidoDESCRICAO.AsString := edtDesProduto.Text;
+  dtmGlobal.qryItemPedidoQUANTIDADE.AsCurrency := StrToCurr(edtQuantidade.Text);
   dtmGlobal.qryItemPedidoVALORUNITARIO.AsCurrency := StrToCurr(edtValorUnitario.Text);
-  dtmGlobal.qryItemPedidoVALORTOTALITEM.AsCurrency := StrToInt(edtValorTotal.Text);
+  dtmGlobal.qryItemPedidoVALORTOTALITEM.AsCurrency := StrToCurr(edtValorTotal.Text);
 
-  dtmGlobal.qryBuscaProximoItemPedido.close;
-  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('CODPEDIDO').AsInteger := StrToInt(edtCodigo.Text);
-  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger := StrToInt(edtNumeroPedido.Text);
+  dtmGlobal.qryBuscaProximoItemPedido.Close;
+  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('CODPEDIDO').AsInteger :=
+    StrToInt(edtCodigo.Text);
+  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger :=
+    StrToInt(edtNumeroPedido.Text);
   dtmGlobal.qryBuscaProximoItemPedido.Open;
 
- // ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
-  dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger := dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
+  // ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
+  dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger :=
+    dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
   dsItens.DataSet.post;
   dtmglobal.transItemPedido.CommitRetaining;
-  dtmGlobal.qryItemPedido.ApplyUpdates;
-  dtmGlobal.transBuscaProximoItem.Active:=False;
-
-
-  ftotal := 0;
-  //vai pra o final da tabela
-  dtmGlobal.qryItemPedido.First;
-  while not  dtmGlobal.qryItemPedido.EOF do
-  begin
-    ftotal := ftotal + dtmGlobal.qryItemPedidoVALORTOTALITEM.Value;
-    dtmGlobal.qryItemPedido.Next;
-  end;
-  //recebe o valor
-  lblValorTotal.Caption  := FormatFloat('#,##0.00', ftotal);
-
-
+  TotalizaPedido;
+  {dtmGlobal.qryItemPedido.ApplyUpdates;
+  dtmGlobal.transBuscaProximoItem.Active:=False; }
 
 end;
 
@@ -203,8 +275,34 @@ begin
   end;
 end;
 
-procedure TfrmLanPedidoVenda.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure TfrmLanPedidoVenda.edtQuantidadeChange(Sender: TObject);
+begin
+  CalculaTotais;
+end;
+
+procedure TfrmLanPedidoVenda.edtQuantidadeKeyPress(Sender: TObject; var Key: char);
+begin
+  if key = #13 then
+  begin
+    btnGravarProdutoClick(self);
+  end;
+  if ((key in ['0'..'9'] = False) and (word(key) <> vk_back)) then
+    key := #0
+end;
+
+procedure TfrmLanPedidoVenda.edtValorUnitarioChange(Sender: TObject);
+begin
+  CalculaTotais;
+end;
+
+procedure TfrmLanPedidoVenda.edtValorUnitarioKeyPress(Sender: TObject; var Key: char);
+begin
+  if ((key in ['0'..'9'] = False) and (word(key) <> vk_back)) then
+    key := #0;
+
+end;
+
+procedure TfrmLanPedidoVenda.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   if Assigned((dsItens.DataSet as TSQLQuery)) then
     (dsItens.DataSet as TSQLQuery).Close;
@@ -212,4 +310,3 @@ begin
 end;
 
 end.
-

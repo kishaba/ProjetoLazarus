@@ -130,7 +130,6 @@ object dtmGlobal: TdtmGlobal
   end
   object qryPedido: TSQLQuery
     PacketRecords = -1
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'CODPEDIDO'
@@ -170,6 +169,8 @@ object dtmGlobal: TdtmGlobal
         Precision = 18
         Size = 4
       end>
+    AfterDelete = qryPedidoAfterDelete
+    AfterPost = qryPedidoAfterPost
     Database = conexao
     Transaction = transPedido
     SQL.Strings = (
@@ -453,7 +454,6 @@ object dtmGlobal: TdtmGlobal
   end
   object qryItemPedido: TSQLQuery
     PacketRecords = -1
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'ITEMPEDIDO'
@@ -499,6 +499,7 @@ object dtmGlobal: TdtmGlobal
         Precision = 18
         Size = 4
       end>
+    AfterPost = qryItemPedidoAfterPost
     Database = conexao
     Transaction = transItemPedido
     SQL.Strings = (

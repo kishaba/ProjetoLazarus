@@ -134,9 +134,10 @@ end;
 
 procedure TfrmPadrao.actExcluirExecute(Sender: TObject);
 begin
-  if MessageDlg('Deseja mesmo Excluir(Inativar) o produto?', mtConfirmation,
+  if MessageDlg('Deseja mesmo Excluir?', mtConfirmation,
     [mbYes, mbNo], 0) = mrYes then
   begin
+     dsPadrao.DataSet.Open;
      dsPadrao.DataSet.Delete
   end;
   ControlaBotoes;

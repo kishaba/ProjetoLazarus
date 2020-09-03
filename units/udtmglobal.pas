@@ -55,6 +55,9 @@ type
     transItemPedido: TSQLTransaction;
     transProduto: TSQLTransaction;
     transPedido: TSQLTransaction;
+    procedure qryItemPedidoAfterPost(DataSet: TDataSet);
+    procedure qryPedidoAfterDelete(DataSet: TDataSet);
+    procedure qryPedidoAfterPost(DataSet: TDataSet);
   private
 
   public
@@ -69,6 +72,24 @@ implementation
 {$R *.lfm}
 
 { TdtmGlobal }
+
+procedure TdtmGlobal.qryItemPedidoAfterPost(DataSet: TDataSet);
+begin
+  qryItemPedido.ApplyUpdates;
+  transBuscaProximoItem.Active:=False;
+end;
+
+procedure TdtmGlobal.qryPedidoAfterDelete(DataSet: TDataSet);
+begin
+  qryPedido.ApplyUpdates;
+  transPedido.Active:=False;
+end;
+
+procedure TdtmGlobal.qryPedidoAfterPost(DataSet: TDataSet);
+begin
+  qryPedido.ApplyUpdates;
+  transPedido.Active:=False;
+end;
 
 end.
 
