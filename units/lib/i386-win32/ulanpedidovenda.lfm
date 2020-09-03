@@ -1,7 +1,7 @@
 inherited frmLanPedidoVenda: TfrmLanPedidoVenda
-  Left = 371
+  Left = 211
   Height = 628
-  Top = 151
+  Top = 154
   Width = 989
   ClientHeight = 628
   ClientWidth = 989
@@ -587,6 +587,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Height = 23
       Top = 16
       Width = 509
+      ReadOnly = True
       TabOrder = 0
     end
     object edtCodigoProduto: TEdit
@@ -640,9 +641,43 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     Width = 989
     Align = alBottom
     BevelOuter = bvNone
+    ClientHeight = 87
+    ClientWidth = 989
     Color = clSkyBlue
     ParentColor = False
     TabOrder = 6
+    object Label13: TLabel
+      Left = 728
+      Height = 24
+      Top = 24
+      Width = 111
+      Caption = 'Valor Total:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblValorTotal: TLabel
+      Left = 856
+      Height = 24
+      Top = 24
+      Width = 111
+      Caption = 'Valor Total:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlue
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
   end
   object edtData: TDateTimePicker[7]
     Left = 424

@@ -39,6 +39,8 @@ type
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
+    Label13: TLabel;
+    lblValorTotal: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -57,8 +59,9 @@ type
   private
     procedure BuscaPedido(CodPedido: Integer);
     procedure BuscaProduto(CodProduto: Integer);
-  public
 
+  public
+    fTotal : CURRENCY;
   end;
 
 var
@@ -141,22 +144,43 @@ end;
 
 procedure TfrmLanPedidoVenda.btnGravarProdutoClick(Sender: TObject);
 begin
-  {dsItens.DataSet.Open;
-  dtmGlobal.ItemPedido.Close;
-  dtmGlobal.ItemPedido.ParamByName('CODPEDIDO').AsInteger    :=StrToInt(edtCodigo.Text);
-  dtmGlobal.ItemPedido.ParamByName('NUMEROPEDIDO').AsInteger := StrToInt(edtNumeroPedido.Text);
-  dtmGlobal.ItemPedido.ParamByName('CODPRODUTO').AsInteger   := StrToInt(edtCodigoProduto.Text);
-  dtmGlobal.ItemPedido.ParamByName('QUANTIDADE').AsCurrency  := StrToCurr(edtQuantidade.Text);
-  dtmGlobal.ItemPedido.ParamByName('VALORUNITARIO').AsCurrency := StrToCurr(edtValorUnitario.Text);
-  dtmGlobal.ItemPedido.ParamByName('VALORTOTALITEM').AsCurrency := StrToInt(edtValorTotal.Text);
-
+  dsItens.DataSet.Open;
+  dtmGlobal.qryItemPedido.Close;;
+  dtmGlobal.qryItemPedido.open;
+  dsItens.DataSet.Open;
+  dsItens.DataSet.Insert;
+  dtmGlobal.qryItemPedidoCODPEDIDO.AsInteger   := StrToInt(edtCodigo.Text);
+  dtmGlobal.qryItemPedidoNUMEROPEDIDO.AsInteger   := StrToInt(edtNumeroPedido.Text);
+  dtmGlobal.qryItemPedidoCODPRODUTO.AsInteger   := StrToInt(edtCodigoProduto.Text);
+  dtmGlobal.qryItemPedidoDESCRICAO.AsString    := edtDesProduto.Text;
+  dtmGlobal.qryItemPedidoQUANTIDADE.AsCurrency  := StrToCurr(edtQuantidade.Text);
+  dtmGlobal.qryItemPedidoVALORUNITARIO.AsCurrency := StrToCurr(edtValorUnitario.Text);
+  dtmGlobal.qryItemPedidoVALORTOTALITEM.AsCurrency := StrToInt(edtValorTotal.Text);
 
   dtmGlobal.qryBuscaProximoItemPedido.close;
   dtmGlobal.qryBuscaProximoItemPedido.ParamByName('CODPEDIDO').AsInteger := StrToInt(edtCodigo.Text);
-  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger := StrToInt(edtCodigo.Text);
-  dtmGlobal.qryBuscaProximoItemPedido.open;
+  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger := StrToInt(edtNumeroPedido.Text);
+  dtmGlobal.qryBuscaProximoItemPedido.Open;
 
-  dtmGlobal.ItemPedido.ParamByName('ITEMPEDIDO').AsInteger := dtmGlobal.qryBuscaProximoItemPedido.FieldByName('NovoITEM').AsInteger+1; }
+ // ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
+  dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger := dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
+  dsItens.DataSet.post;
+  dtmglobal.transItemPedido.CommitRetaining;
+  dtmGlobal.qryItemPedido.ApplyUpdates;
+  dtmGlobal.transBuscaProximoItem.Active:=False;
+
+
+  ftotal := 0;
+  //vai pra o final da tabela
+  dtmGlobal.qryItemPedido.First;
+  while not  dtmGlobal.qryItemPedido.EOF do
+  begin
+    ftotal := ftotal + dtmGlobal.qryItemPedidoVALORTOTALITEM.Value;
+    dtmGlobal.qryItemPedido.Next;
+  end;
+  //recebe o valor
+  lblValorTotal.Caption  := FormatFloat('#,##0.00', ftotal);
+
 
 
 end;

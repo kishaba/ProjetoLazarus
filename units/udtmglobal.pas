@@ -13,6 +13,8 @@ type
 
   TdtmGlobal = class(TDataModule)
     conexao: TIBConnection;
+    qryBuscaProximoItemPedido: TSQLQuery;
+    qryBuscaProximoItemPedidoNOVOITEM: TLargeintField;
     qryConsultaPedido: TSQLQuery;
     qryBuscaProduto: TSQLQuery;
     qryConsultaPedidoCODIGOCLIENTE: TLongintField;
@@ -26,9 +28,11 @@ type
     qryBuscaProdutoDESCRICAO: TStringField;
     qryBuscaProdutoSITUACAO: TStringField;
     qryItemPedido: TSQLQuery;
+    qryItemPedidoCODPEDIDO: TLongintField;
     qryItemPedidoCODPRODUTO: TLongintField;
     qryItemPedidoDESCRICAO: TStringField;
     qryItemPedidoITEMPEDIDO: TLongintField;
+    qryItemPedidoNUMEROPEDIDO: TLongintField;
     qryItemPedidoQUANTIDADE: TBCDField;
     qryItemPedidoVALORTOTALITEM: TBCDField;
     qryItemPedidoVALORUNITARIO: TBCDField;
@@ -47,6 +51,7 @@ type
     transConexao: TSQLTransaction;
     transConsultaPedido: TSQLTransaction;
     transConsultaProduto: TSQLTransaction;
+    transBuscaProximoItem: TSQLTransaction;
     transItemPedido: TSQLTransaction;
     transProduto: TSQLTransaction;
     transPedido: TSQLTransaction;

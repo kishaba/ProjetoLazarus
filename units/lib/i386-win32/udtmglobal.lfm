@@ -453,6 +453,7 @@ object dtmGlobal: TdtmGlobal
   end
   object qryItemPedido: TSQLQuery
     PacketRecords = -1
+    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'ITEMPEDIDO'
@@ -461,6 +462,16 @@ object dtmGlobal: TdtmGlobal
       end    
       item
         Name = 'CODPRODUTO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NUMEROPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'CODPEDIDO'
         DataType = ftInteger
         Precision = -1
       end    
@@ -493,6 +504,8 @@ object dtmGlobal: TdtmGlobal
     SQL.Strings = (
       'select itempedido.itempedido,'
       '       itempedido.codproduto,'
+      '       ITEMPEDIDO.numeropedido,'
+      '       ITEMPEDIDO.codpedido,'
       '       produto.descricao,'
       '       itempedido.quantidade,'
       '       itempedido.valorunitario,'
@@ -500,6 +513,7 @@ object dtmGlobal: TdtmGlobal
       'from   itempedido join produto on (itempedido.codproduto = produto.codproduto)'
       'where  itempedido.numeropedido = :numeropedido'
       'and    itempedido.codpedido    = :codpedido'
+      'order by itempedido.itempedido'
       ''
     )
     InsertSQL.Strings = (
@@ -538,6 +552,7 @@ object dtmGlobal: TdtmGlobal
       '  ITEMPEDIDO = :ITEMPEDIDO and'
       '  NUMEROPEDIDO = :NUMEROPEDIDO and'
       '  CODPEDIDO = :CODPEDIDO'
+      'order by itempedido.itempedido'
       ''
       ''
     )
@@ -634,9 +649,27 @@ object dtmGlobal: TdtmGlobal
       MaxValue = 0
       MinValue = 0
     end
+    object qryItemPedidoNUMEROPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'NUMEROPEDIDO'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryItemPedidoCODPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODPEDIDO'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
   end
   object transItemPedido: TSQLTransaction
-    Active = False
+    Active = True
     Action = caCommitRetaining
     Database = conexao
     left = 304
@@ -670,7 +703,7 @@ object dtmGlobal: TdtmGlobal
         Size = 1
       end>
     Database = conexao
-    Transaction = transConexao
+    Transaction = transConsultaProduto
     SQL.Strings = (
       'select * from produto'
       'where produto.codproduto = :codproduto'
@@ -730,5 +763,69 @@ object dtmGlobal: TdtmGlobal
       Required = False
       Size = 1
     end
+  end
+  object qryBuscaProximoItemPedido: TSQLQuery
+    PacketRecords = -1
+    FieldDefs = <    
+      item
+        Name = 'NOVOITEM'
+        DataType = ftLargeint
+        Precision = -1
+      end>
+    Database = conexao
+    Transaction = transBuscaProximoItem
+    SQL.Strings = (
+      'SELECT COALESCE(MAX(itempedido.itemPedido),0)+1 as NovoITEM'
+      'FROM itempedido'
+      'WHERE itempedido.codpedido        = :codpedido'
+      'AND   itempedido.numeropedido    = :NUMEROPEDIDO'
+      ''
+    )
+    InsertSQL.Strings = (
+      ''
+    )
+    UpdateSQL.Strings = (
+      ''
+    )
+    DeleteSQL.Strings = (
+      ''
+    )
+    RefreshSQL.Strings = (
+      ''
+      ''
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'codpedido'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'NUMEROPEDIDO'
+        ParamType = ptInput
+      end>
+    Sequence.FieldName = 'CODPEDIDO'
+    Sequence.SequenceName = 'GEN_CODPEDIDO'
+    Sequence.ApplyEvent = saeOnPost
+    left = 40
+    top = 280
+    object qryBuscaProximoItemPedidoNOVOITEM: TLargeintField
+      FieldKind = fkData
+      FieldName = 'NOVOITEM'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object transBuscaProximoItem: TSQLTransaction
+    Active = True
+    Action = caCommitRetaining
+    Database = conexao
+    left = 176
+    top = 280
   end
 end
