@@ -38,6 +38,7 @@ type
     procedure actIncluirExecute(Sender: TObject);
     procedure actSalvarExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormShow(Sender: TObject);
   private
     procedure ControlaBotoes;
     procedure HabilitaEdicao(status:boolean);
@@ -74,6 +75,12 @@ procedure TfrmPadrao.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   if Assigned((dsPadrao.DataSet as TSQLQuery)) then
     (dsPadrao.DataSet as TSQLQuery).Close;
+end;
+
+procedure TfrmPadrao.FormShow(Sender: TObject);
+begin
+  HabilitaEdicao(false);
+  ControlaBotoes;
 end;
 
 procedure TfrmPadrao.ControlaBotoes;

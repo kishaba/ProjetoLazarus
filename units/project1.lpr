@@ -8,7 +8,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, datetimectrls, uPrincipal, uFormPadrao, uDtmGlobal, uCadProduto,
-  uPesquisa, uLanPedidoVenda
+  uPesquisa, uLanPedidoVenda, uFinalizarPedido
   { you can add units after this };
 
 {$R *.res}
@@ -22,6 +22,7 @@ begin
   Application.CreateForm(TfrmCadProduto, frmCadProduto);
   Application.CreateForm(TfrmPesquisa, frmPesquisa);
   Application.CreateForm(TfrmLanPedidoVenda, frmLanPedidoVenda);
+  Application.CreateForm(TfrmFinalizaPedidoVenda, frmFinalizaPedidoVenda);
   Application.Run;
 end.
 

@@ -14,6 +14,8 @@ type
   { TfrmLanPedidoVenda }
 
   TfrmLanPedidoVenda = class(TfrmPadrao)
+    actFinalizaPedido: TAction;
+    btnFinalizaPedido: TImage;
     btnGravarProduto: TImage;
     btnPesquisaProduto: TImage;
     btnBuscaPedido: TImage;
@@ -40,6 +42,7 @@ type
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
+    lblF10: TLabel;
     lblValorTotal: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -49,11 +52,14 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    lblValorTotal1: TLabel;
+    lblValorTotal2: TLabel;
     Panel3: TPanel;
     procedure actEditaExecute(Sender: TObject);
     procedure actIncluirExecute(Sender: TObject);
     procedure actSalvarExecute(Sender: TObject);
     procedure btnBuscaPedidoClick(Sender: TObject);
+    procedure btnFinalizaPedidoClick(Sender: TObject);
     procedure btnExcluirProdutoClick(Sender: TObject);
     procedure btnGravarProdutoClick(Sender: TObject);
     procedure btnPesquisaProdutoClick(Sender: TObject);
@@ -83,7 +89,7 @@ implementation
 
 {$R *.lfm}
 uses
-  uPesquisa, uDtmGlobal;
+  uPesquisa, uDtmGlobal,uFinalizarPedido;
 
 { TfrmLanPedidoVenda }
 
@@ -245,6 +251,11 @@ begin
   finally
     FreeAndNil(frmPesquisa);
   end;
+end;
+
+procedure TfrmLanPedidoVenda.btnFinalizaPedidoClick(Sender: TObject);
+begin
+  frmFinalizaPedidoVenda.ShowModal;
 end;
 
 procedure TfrmLanPedidoVenda.btnExcluirProdutoClick(Sender: TObject);

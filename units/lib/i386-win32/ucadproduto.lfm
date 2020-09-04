@@ -1,8 +1,9 @@
 inherited frmCadProduto: TfrmCadProduto
-  Left = 507
-  Top = 145
+  Left = 292
+  BorderStyle = bsSingle
   OnShow = FormShow
   Position = poDesigned
+  Scaled = False
   inherited Panel1: TPanel
     Caption = 'Cadastro de Produtos'
   end
