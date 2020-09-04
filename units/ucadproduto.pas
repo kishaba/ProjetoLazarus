@@ -85,7 +85,8 @@ end;
 
 procedure TfrmCadProduto.btnIncluiClick(Sender: TObject);
 begin
-
+  dtmGlobal.transProduto.Active:=false;
+  dtmGlobal.transProduto.Active:=true;
   actIncluir.Execute;
 
 end;

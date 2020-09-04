@@ -81,12 +81,11 @@ object dtmGlobal: TdtmGlobal
       '  CODPRODUTO = :CODPRODUTO'
       ''
     )
-    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
     Params = <>
     Sequence.FieldName = 'CODPRODUTO'
     Sequence.SequenceName = 'GEN_CODPRODUTO'
     Sequence.ApplyEvent = saeOnPost
-    left = 40
+    left = 48
     top = 88
     object qryProdutoCODPRODUTO: TLongintField
       DisplayLabel = 'Código'
@@ -222,7 +221,6 @@ object dtmGlobal: TdtmGlobal
       '  NUMEROPEDIDO = :NUMEROPEDIDO'
       ''
     )
-    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
     Params = <>
     Sequence.FieldName = 'CODPEDIDO'
     Sequence.SequenceName = 'GEN_CODPEDIDO'
@@ -559,7 +557,6 @@ object dtmGlobal: TdtmGlobal
       ''
       ''
     )
-    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
     Params = <    
       item
         DataType = ftUnknown
@@ -797,7 +794,6 @@ object dtmGlobal: TdtmGlobal
       ''
       ''
     )
-    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit, sqoRefreshUsingSelect]
     Params = <    
       item
         DataType = ftUnknown

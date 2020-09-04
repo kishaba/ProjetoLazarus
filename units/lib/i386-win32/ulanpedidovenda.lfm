@@ -271,7 +271,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     end
   end
   object grpProduto: TGroupBox[4]
-    Left = 90
+    Left = 88
     Height = 124
     Top = 193
     Width = 823
@@ -593,7 +593,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       TabOrder = 0
     end
     object edtCodigoProduto: TEdit
-      Left = 7
+      Left = 8
       Height = 23
       Top = 16
       Width = 74
@@ -641,6 +641,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
+    OnCellClick = grdProdutosCellClick
   end
   object Panel3: TPanel[6]
     Left = 0
@@ -724,7 +725,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
   end
   object dsItens: TDataSource[10]
     DataSet = dtmGlobal.qryItemPedido
-    left = 432
-    top = 272
+    left = 760
+    top = 224
   end
 end

@@ -185,6 +185,7 @@ object frmPesquisa: TfrmPesquisa
   end
   object transSQl: TSQLTransaction
     Active = False
+    Action = caCommitRetaining
     Database = dtmGlobal.conexao
     left = 432
     top = 88

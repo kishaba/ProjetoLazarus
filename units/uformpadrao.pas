@@ -56,7 +56,7 @@ implementation
 
 procedure TfrmPadrao.actIncluirExecute(Sender: TObject);
 begin
-  dsPadrao.DataSet.Open;
+  dsPadrao.DataSet.open;
   dsPadrao.DataSet.INSERT;
   ControlaBotoes;
   HabilitaEdicao(true);

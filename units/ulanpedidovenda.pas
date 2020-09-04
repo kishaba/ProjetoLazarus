@@ -63,6 +63,7 @@ type
     procedure edtValorUnitarioKeyPress(Sender: TObject; var Key: char);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure grdProdutosCellClick(Column: TColumn);
   private
     procedure BuscaPedido(CodPedido: integer);
     procedure BuscaProduto(CodProduto: integer);
@@ -89,6 +90,15 @@ uses
 procedure TfrmLanPedidoVenda.FormShow(Sender: TObject);
 begin
   edtData.Date := now;
+end;
+
+procedure TfrmLanPedidoVenda.grdProdutosCellClick(Column: TColumn);
+begin
+  edtCodigoProduto.Text:=grdProdutos.columns.items[1].field.text;
+  edtDesProduto.Text:=grdProdutos.columns.items[2].field.text;
+  edtValorUnitario.Text:=grdProdutos.columns.items[3].field.text;
+  edtQuantidade.Text:=grdProdutos.columns.items[4].field.text;
+  edtValorTotal.Text:=grdProdutos.columns.items[5].field.text;
 end;
 
 procedure TfrmLanPedidoVenda.BuscaPedido(CodPedido: integer);
@@ -169,6 +179,7 @@ procedure TfrmLanPedidoVenda.TotalizaPedido;
 begin
   ftotal := 0;
   //vai pra o final da tabela
+  dtmGlobal.qryItemPedido.open;
   dtmGlobal.qryItemPedido.First;
   while not dtmGlobal.qryItemPedido.EOF do
   begin
@@ -248,6 +259,8 @@ end;
 
 procedure TfrmLanPedidoVenda.btnGravarProdutoClick(Sender: TObject);
 begin
+  dtmGlobal.transItemPedido.Active:=false;
+  dtmGlobal.transBuscaProximoItem.Active:=false;
   dsItens.DataSet.Open;
   dtmGlobal.qryItemPedido.Close;
 
@@ -261,22 +274,17 @@ begin
   dtmGlobal.qryItemPedidoVALORUNITARIO.AsCurrency := StrToCurr(edtValorUnitario.Text);
   dtmGlobal.qryItemPedidoVALORTOTALITEM.AsCurrency := StrToCurr(edtValorTotal.Text);
 
+
   dtmGlobal.qryBuscaProximoItemPedido.Close;
-  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('CODPEDIDO').AsInteger :=
-    StrToInt(edtCodigo.Text);
-  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger :=
-    StrToInt(edtNumeroPedido.Text);
+  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('CODPEDIDO').AsInteger :=StrToInt(edtCodigo.Text);
+  dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger :=StrToInt(edtNumeroPedido.Text);
   dtmGlobal.qryBuscaProximoItemPedido.Open;
 
-  // ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
+  ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
   dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger :=dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
-    dtmGlobal.qryItemPedido.Open;
+  dtmGlobal.qryItemPedido.Open;
   dsItens.DataSet.post;
-  dtmglobal.transItemPedido.CommitRetaining;
   TotalizaPedido;
-  {dtmGlobal.qryItemPedido.ApplyUpdates;
-  dtmGlobal.transBuscaProximoItem.Active:=False; }
-
 end;
 
 procedure TfrmLanPedidoVenda.btnPesquisaProdutoClick(Sender: TObject);
@@ -288,6 +296,9 @@ begin
     begin
       edtCodigoProduto.Text := frmPesquisa.edtRetorno.Text;
       BuscaProduto(StrToInt(frmPesquisa.edtRetorno.Text));
+      edtQuantidade.clear;
+      edtValorUnitario.Clear;
+      edtValorTotal.Clear;
     end
     else
       edtCodigoProduto.Clear;

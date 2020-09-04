@@ -78,7 +78,7 @@ implementation
 procedure TdtmGlobal.qryItemPedidoAfterPost(DataSet: TDataSet);
 begin
   qryItemPedido.ApplyUpdates;
-  transBuscaProximoItem.Active:=False;
+  transItemPedido.CommitRetaining;
 end;
 
 procedure TdtmGlobal.DataModuleCreate(Sender: TObject);
@@ -87,26 +87,26 @@ begin
   qryPedido.Transaction:=transPedido;
   qryItemPedido.Transaction:=transItemPedido;
   qryConsultaPedido.Transaction:=transConsultaPedido;
-  qryBuscaProximoItemPedido.Transaction:=transConsultaProduto;
-  qryBuscaProduto.Transaction:=transBuscaProximoItem;
+  qryBuscaProximoItemPedido.Transaction:=transBuscaProximoItem;
+  qryBuscaProduto.Transaction:=transConsultaProduto;
 end;
 
 procedure TdtmGlobal.qryPedidoAfterDelete(DataSet: TDataSet);
 begin
   qryPedido.ApplyUpdates;
-  transPedido.Active:=False;
+  transPedido.CommitRetaining;
 end;
 
 procedure TdtmGlobal.qryPedidoAfterPost(DataSet: TDataSet);
 begin
   qryPedido.ApplyUpdates;
-  transPedido.Active:=False;
+  transPedido.CommitRetaining;
 end;
 
 procedure TdtmGlobal.qryProdutoAfterPost(DataSet: TDataSet);
 begin
   qryProduto.ApplyUpdates;
-  transProduto.Active:=False;
+  transProduto.CommitRetaining;
 end;
 
 end.

@@ -83,6 +83,7 @@ var
 begin
   inherited Create(AOwner);
   // Conexao.Open;
+  qrySql.Transaction:= transSQl;
   qrySql.Close;
   transSQl.Active:=false;
   cCampoRetorno := par_cCampoResult;
