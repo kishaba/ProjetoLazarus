@@ -280,7 +280,7 @@ begin
   dtmGlobal.qryBuscaProximoItemPedido.ParamByName('NUMEROPEDIDO').AsInteger :=StrToInt(edtNumeroPedido.Text);
   dtmGlobal.qryBuscaProximoItemPedido.Open;
 
-  ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
+  //ShowMessage( dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsString);
   dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger :=dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
   dtmGlobal.qryItemPedido.Open;
   dsItens.DataSet.post;
