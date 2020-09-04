@@ -669,7 +669,7 @@ object dtmGlobal: TdtmGlobal
     end
   end
   object transItemPedido: TSQLTransaction
-    Active = True
+    Active = False
     Action = caCommitRetaining
     Database = conexao
     left = 304

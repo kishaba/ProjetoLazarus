@@ -1,7 +1,7 @@
 inherited frmLanPedidoVenda: TfrmLanPedidoVenda
-  Left = 308
+  Left = 282
   Height = 673
-  Top = 89
+  Top = 203
   Width = 896
   BorderStyle = bsSingle
   ClientHeight = 673
