@@ -5,7 +5,7 @@ unit uDtmGlobal;
 interface
 
 uses
-  Classes, SysUtils, IBConnection, sqldb, DB, FileUtil, Dialogs;
+  Classes, SysUtils, IBConnection, sqldb, DB, FileUtil, Dialogs,Forms;
 
 type
 
@@ -140,7 +140,7 @@ begin
 
   // [ 1 ] Associa a variável do programa "arq" ao arquivo externo "tabuada.txt"
   //       na unidade de disco "d"
- { AssignFile(arq, Application.ExeName, '.ini');
+  AssignFile(arq, Application.Title+'.ini');
 
   {$I-}// desativa a diretiva de Input
   Reset(arq);   // [ 3 ] Abre o arquivo texto para leitura
@@ -156,10 +156,11 @@ begin
     begin
       readln(arq, linha); // [ 6 ] Lê uma linha do arquivo
       sCaminhoBanco := (linha);
+      //ShowMessage(sCaminhoBanco);
     end;
 
     CloseFile(arq); // [ 8 ] Fecha o arquivo texto aberto
-  end;  }
+  end;
 end;
 
 
@@ -167,7 +168,7 @@ function TdtmGlobal.ConectaServidor: boolean;
 begin
   conexao.Connected := False;
   LerConfiguracao;
-  conexao.DatabaseName :='H:\GitHub\ProjetoDelphi\PROJETO.FDB';
+  conexao.DatabaseName :=sCaminhoBanco;
   try
     conexao.Connected := True;
     Result := True;

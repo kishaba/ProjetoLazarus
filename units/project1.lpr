@@ -14,6 +14,7 @@ uses
 {$R *.res}
 
 begin
+  Application.Title:='Projeto';
   RequireDerivedFormResource:=True;
   Application.Initialize;
   Application.CreateForm(TdtmGlobal, dtmGlobal);
