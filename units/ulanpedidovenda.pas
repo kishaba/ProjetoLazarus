@@ -58,6 +58,7 @@ type
     Panel3: TPanel;
     procedure actCancelarExecute(Sender: TObject);
     procedure actEditaExecute(Sender: TObject);
+    procedure actExcluirExecute(Sender: TObject);
     procedure actIncluirExecute(Sender: TObject);
     procedure actSalvarExecute(Sender: TObject);
     procedure btnBuscaPedidoClick(Sender: TObject);
@@ -281,6 +282,23 @@ begin
     inherited;
     grpProduto.Enabled:=False;
   end;
+end;
+
+procedure TfrmLanPedidoVenda.actExcluirExecute(Sender: TObject);
+var i :integer;
+begin
+  inherited;
+  for I := 0 to ComponentCount-1 do
+   begin
+     if Components[i] is TDBEdit then
+     begin
+       TDBEdit(Components[i]).Text    := '';
+     end
+     else if Components[i] is TEdit then
+     begin
+       TDBComboBox(Components[i]).text  := '';
+     end;
+   end;
 end;
 
 procedure TfrmLanPedidoVenda.actCancelarExecute(Sender: TObject);

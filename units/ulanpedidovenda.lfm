@@ -858,6 +858,9 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     inherited actEdita: TAction
       OnExecute = actEditaExecute
     end
+    inherited actExcluir: TAction
+      OnExecute = actExcluirExecute
+    end
     inherited actSalvar: TAction
       OnExecute = actSalvarExecute
     end

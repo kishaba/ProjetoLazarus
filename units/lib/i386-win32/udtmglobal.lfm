@@ -604,6 +604,7 @@ object dtmGlobal: TdtmGlobal
     left = 216
     top = 32
     object qryItemPedidoITEMPEDIDO: TLongintField
+      DisplayLabel = 'Item'
       DisplayWidth = 3
       FieldKind = fkData
       FieldName = 'ITEMPEDIDO'
@@ -653,7 +654,7 @@ object dtmGlobal: TdtmGlobal
     end
     object qryItemPedidoVALORUNITARIO: TBCDField
       DisplayLabel = 'Valor Unitário'
-      DisplayWidth = 10
+      DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'VALORUNITARIO'
       Index = 4
@@ -668,7 +669,7 @@ object dtmGlobal: TdtmGlobal
     end
     object qryItemPedidoVALORTOTALITEM: TBCDField
       DisplayLabel = 'Valor Total Item'
-      DisplayWidth = 10
+      DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'VALORTOTALITEM'
       Index = 5
@@ -682,6 +683,7 @@ object dtmGlobal: TdtmGlobal
       MinValue = 0
     end
     object qryItemPedidoNUMEROPEDIDO: TLongintField
+      DisplayWidth = 3
       FieldKind = fkData
       FieldName = 'NUMEROPEDIDO'
       Index = 6
@@ -691,6 +693,7 @@ object dtmGlobal: TdtmGlobal
       Required = True
     end
     object qryItemPedidoCODPEDIDO: TLongintField
+      DisplayWidth = 3
       FieldKind = fkData
       FieldName = 'CODPEDIDO'
       Index = 7

@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="5" Y="29"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -20,9 +20,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPrincipal"/>
-        <TopLine Value="39"/>
-        <CursorPos X="35" Y="34"/>
-        <UsageCount Value="52"/>
+        <TopLine Value="125"/>
+        <CursorPos Y="195"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -36,7 +36,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="105"/>
         <CursorPos X="6" Y="127"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit2>
@@ -47,11 +47,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="uDtmGlobal"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="110"/>
-        <CursorPos X="37" Y="113"/>
-        <UsageCount Value="52"/>
+        <CursorPos X="98" Y="129"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -64,7 +63,7 @@
         <UnitName Value="uCadProduto"/>
         <EditorIndex Value="5"/>
         <CursorPos X="99" Y="8"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit4>
@@ -77,7 +76,7 @@
         <UnitName Value="uPesquisa"/>
         <EditorIndex Value="4"/>
         <CursorPos X="43" Y="30"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit5>
@@ -88,10 +87,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uLanPedidoVenda"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="351"/>
-        <CursorPos X="3" Y="353"/>
-        <UsageCount Value="52"/>
+        <TopLine Value="265"/>
+        <CursorPos X="3" Y="289"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit6>
@@ -105,7 +105,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="57" Y="23"/>
-        <UsageCount Value="37"/>
+        <UsageCount Value="38"/>
       </Unit7>
       <Unit8>
         <Filename Value="uencerrapedido.pas"/>
@@ -115,9 +115,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uEncerraPedido"/>
         <EditorIndex Value="8"/>
-        <TopLine Value="23"/>
-        <CursorPos X="55" Y="82"/>
-        <UsageCount Value="33"/>
+        <TopLine Value="32"/>
+        <CursorPos X="5" Y="41"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit8>
@@ -176,123 +176,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="82" Column="26" TopLine="40"/>
+        <Caret Line="246" Column="92" TopLine="232"/>
       </Position1>
       <Position2>
         <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="247" Column="29" TopLine="232"/>
+        <Caret Line="270" Column="55" TopLine="255"/>
       </Position2>
       <Position3>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="102" Column="52" TopLine="81"/>
+        <Filename Value="ulanpedidovenda.pas"/>
+        <Caret Line="292" Column="50" TopLine="285"/>
       </Position3>
       <Position4>
-        <Filename Value="ucadproduto.pas"/>
-        <Caret Line="88" Column="3" TopLine="86"/>
+        <Filename Value="ulanpedidovenda.pas"/>
+        <Caret Line="262" Column="32" TopLine="256"/>
       </Position4>
       <Position5>
         <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="239" Column="138" TopLine="221"/>
+        <Caret Line="290" Column="32" TopLine="287"/>
       </Position5>
       <Position6>
         <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="9" Column="113"/>
+        <Caret Line="289" Column="32" TopLine="286"/>
       </Position6>
       <Position7>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="82" Column="20" TopLine="40"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="78" Column="37" TopLine="45"/>
       </Position7>
       <Position8>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="246" Column="92" TopLine="232"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="128" Column="63" TopLine="92"/>
       </Position8>
       <Position9>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="270" Column="55" TopLine="255"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="135" Column="19" TopLine="91"/>
       </Position9>
       <Position10>
         <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="292" Column="50" TopLine="285"/>
+        <Caret Column="84"/>
       </Position10>
       <Position11>
         <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="262" Column="32" TopLine="256"/>
+        <Caret Line="268" Column="15" TopLine="225"/>
       </Position11>
       <Position12>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="290" Column="32" TopLine="287"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="135" Column="9" TopLine="91"/>
       </Position12>
       <Position13>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="289" Column="32" TopLine="286"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="136" Column="24" TopLine="92"/>
       </Position13>
       <Position14>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="78" Column="37" TopLine="45"/>
+        <Caret Line="76" Column="31" TopLine="63"/>
       </Position14>
       <Position15>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="128" Column="63" TopLine="92"/>
+        <Caret Line="136" Column="37" TopLine="109"/>
       </Position15>
       <Position16>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="135" Column="19" TopLine="91"/>
+        <Caret Line="79" Column="5" TopLine="55"/>
       </Position16>
       <Position17>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Column="84"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="89" Column="12" TopLine="64"/>
       </Position17>
       <Position18>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="268" Column="15" TopLine="225"/>
+        <Filename Value="udtmglobal.pas"/>
+        <Caret Line="163" Column="19" TopLine="126"/>
       </Position18>
       <Position19>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="135" Column="9" TopLine="91"/>
+        <Caret Line="132" Column="6" TopLine="108"/>
       </Position19>
       <Position20>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="136" Column="24" TopLine="92"/>
+        <Filename Value="ulanpedidovenda.pas"/>
+        <Caret Line="268" Column="15"/>
       </Position20>
       <Position21>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="76" Column="31" TopLine="63"/>
+        <Caret Line="136" Column="95" TopLine="126"/>
       </Position21>
       <Position22>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="136" Column="37" TopLine="109"/>
+        <Caret Line="95" TopLine="91"/>
       </Position22>
       <Position23>
         <Filename Value="udtmglobal.pas"/>
-        <Caret Line="79" Column="5" TopLine="55"/>
+        <Caret Line="102" TopLine="89"/>
       </Position23>
       <Position24>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="89" Column="12" TopLine="64"/>
+        <Filename Value="uprincipal.pas"/>
+        <Caret Line="34" Column="35" TopLine="39"/>
       </Position24>
       <Position25>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="163" Column="19" TopLine="126"/>
+        <Filename Value="uprincipal.pas"/>
+        <Caret Line="33" Column="35" TopLine="33"/>
       </Position25>
       <Position26>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="132" Column="6" TopLine="108"/>
+        <Filename Value="uprincipal.pas"/>
+        <Caret Line="32" Column="35" TopLine="32"/>
       </Position26>
       <Position27>
-        <Filename Value="ulanpedidovenda.pas"/>
-        <Caret Line="268" Column="15"/>
+        <Filename Value="uencerrapedido.pas"/>
+        <Caret Line="82" Column="55" TopLine="23"/>
       </Position27>
       <Position28>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="136" Column="95" TopLine="126"/>
+        <Filename Value="uencerrapedido.pas"/>
+        <Caret Line="81" Column="55" TopLine="31"/>
       </Position28>
       <Position29>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="95" TopLine="91"/>
+        <Filename Value="uencerrapedido.pas"/>
+        <Caret Line="80" Column="55" TopLine="31"/>
       </Position29>
       <Position30>
-        <Filename Value="udtmglobal.pas"/>
-        <Caret Line="102" TopLine="89"/>
+        <Filename Value="ulanpedidovenda.pas"/>
+        <Caret Line="359" Column="3" TopLine="357"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
