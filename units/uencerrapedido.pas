@@ -13,7 +13,6 @@ type
   { TfrmEncerraPedido }
 
   TfrmEncerraPedido = class(TForm)
-    btnCancela: TImage;
     btnSalva: TImage;
     dsPadrao: TDataSource;
     DBGrid1: TDBGrid;
@@ -33,7 +32,6 @@ type
     lblIntervalo: TLabel;
     lblDias: TLabel;
     lblF5: TLabel;
-    lblF6: TLabel;
     lblNumeroPedido: TLabel;
     lblCodigoPedido: TLabel;
     Panel1: TPanel;
