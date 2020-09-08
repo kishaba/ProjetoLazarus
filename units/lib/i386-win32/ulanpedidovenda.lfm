@@ -1,10 +1,10 @@
 inherited frmLanPedidoVenda: TfrmLanPedidoVenda
-  Left = 282
-  Height = 673
-  Top = 203
+  Left = 289
+  Height = 698
+  Top = 163
   Width = 896
   BorderStyle = bsSingle
-  ClientHeight = 673
+  ClientHeight = 698
   ClientWidth = 896
   OnClose = FormClose
   OnShow = FormShow
@@ -14,8 +14,8 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     Caption = 'Pedido de Venda'
   end
   inherited Panel2: TPanel
-    Height = 583
-    ClientHeight = 583
+    Height = 608
+    ClientHeight = 608
     inherited btnSalva: TImage
       Top = 363
       Visible = True
@@ -163,24 +163,15 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
   end
   object grpPedido: TGroupBox[2]
     Left = 90
-    Height = 74
+    Height = 73
     Top = 47
     Width = 795
     Anchors = [akTop, akLeft, akRight]
-    ClientHeight = 54
+    ClientHeight = 53
     ClientWidth = 791
     TabOrder = 2
-    object Label1: TLabel
-      Left = 13
-      Height = 15
-      Top = 0
-      Width = 39
-      Caption = 'Código'
-      FocusControl = edtCodigo
-      ParentColor = False
-    end
     object Label2: TLabel
-      Left = 88
+      Left = 112
       Height = 15
       Top = 0
       Width = 55
@@ -189,7 +180,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       ParentColor = False
     end
     object Label3: TLabel
-      Left = 232
+      Left = 0
       Height = 15
       Top = 0
       Width = 84
@@ -198,7 +189,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       ParentColor = False
     end
     object Label4: TLabel
-      Left = 328
+      Left = 256
       Height = 15
       Top = 0
       Width = 70
@@ -206,7 +197,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       ParentColor = False
     end
     object Label6: TLabel
-      Left = 424
+      Left = 352
       Height = 15
       Top = 0
       Width = 76
@@ -220,25 +211,12 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Top = 360
       Width = 67
       Caption = 'Total Pedido'
-      FocusControl = DBEdit7
       ParentColor = False
     end
-    object edtCodigo: TDBEdit
-      Left = 13
-      Height = 23
-      Top = 17
-      Width = 33
-      DataField = 'CODPEDIDO'
-      DataSource = dsPadrao
-      CharCase = ecNormal
-      Enabled = False
-      MaxLength = 0
-      TabOrder = 0
-    end
     object edtReferencia: TDBEdit
-      Left = 88
+      Left = 112
       Height = 23
-      Top = 17
+      Top = 16
       Width = 134
       DataField = 'REFERENCIA'
       DataSource = dsPadrao
@@ -247,20 +225,20 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       TabOrder = 1
     end
     object edtNumeroPedido: TDBEdit
-      Left = 232
+      Left = 5
       Height = 23
-      Top = 17
+      Top = 16
       Width = 72
       DataField = 'NUMEROPEDIDO'
       DataSource = dsPadrao
       CharCase = ecNormal
       MaxLength = 0
-      TabOrder = 2
+      TabOrder = 0
     end
     object edtTipoOperacao: TDBEdit
-      Left = 424
+      Left = 352
       Height = 23
-      Top = 14
+      Top = 12
       Width = 29
       DataField = 'TIPOPERACAO'
       DataSource = dsPadrao
@@ -268,23 +246,12 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       MaxLength = 0
       TabOrder = 3
     end
-    object DBEdit7: TDBEdit
-      Left = 168
-      Height = 23
-      Top = 376
-      Width = 251
-      DataField = 'TOTALPEDIDO'
-      DataSource = dsPadrao
-      CharCase = ecNormal
-      MaxLength = 0
-      TabOrder = 4
-    end
     object btnBuscaPedido: TImage
       Cursor = crHandPoint
-      Left = 54
+      Left = 80
       Height = 25
       Hint = 'Inserir'
-      Top = 14
+      Top = 12
       Width = 25
       Align = alCustom
       OnClick = btnBuscaPedidoClick
@@ -373,6 +340,41 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       ShowHint = True
       Stretch = True
     end
+    object edtCodigo: TDBEdit
+      Left = 632
+      Height = 23
+      Top = 23
+      Width = 134
+      DataField = 'CODPEDIDO'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      Enabled = False
+      MaxLength = 0
+      TabOrder = 4
+      Visible = False
+    end
+    object edtData: TDateTimePicker
+      Left = 256
+      Height = 23
+      Top = 16
+      Width = 83
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 2
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 44077
+      Time = 0.400479687501502
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+    end
   end
   object frmLanPedidoVenda: TGroupBox[3]
     Left = 90
@@ -405,9 +407,9 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     end
   end
   object grpProduto: TGroupBox[4]
-    Left = 88
+    Left = 96
     Height = 124
-    Top = 193
+    Top = 192
     Width = 795
     Anchors = [akTop, akLeft, akRight]
     Caption = 'Dados Produto'
@@ -731,6 +733,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Height = 23
       Top = 16
       Width = 74
+      OnExit = edtCodigoProdutoExit
       TabOrder = 1
     end
     object edtValorUnitario: TEdit
@@ -771,7 +774,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
   end
   object grdProdutos: TDBGrid[5]
     Left = 90
-    Height = 293
+    Height = 318
     Top = 323
     Width = 806
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -788,7 +791,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
   object Panel3: TPanel[6]
     Left = 0
     Height = 49
-    Top = 624
+    Top = 649
     Width = 896
     Align = alBottom
     BevelOuter = bvNone
@@ -829,29 +832,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       ParentFont = False
     end
   end
-  object edtData: TDateTimePicker[7]
-    Left = 424
-    Height = 23
-    Top = 80
-    Width = 83
-    CenturyFrom = 1941
-    MaxDate = 2958465
-    MinDate = -53780
-    TabOrder = 7
-    TrailingSeparator = False
-    TextForNullDate = 'NULL'
-    LeadingZeros = True
-    Kind = dtkDate
-    TimeFormat = tf24
-    TimeDisplay = tdHMS
-    DateMode = dmComboBox
-    Date = 44077
-    Time = 0.400479687501502
-    UseDefaultSeparators = True
-    HideDateTimeParts = []
-    MonthNames = 'Long'
-  end
-  object lblValorTotal1: TLabel[8]
+  object lblValorTotal1: TLabel[7]
     Left = 192
     Height = 24
     Top = 8
@@ -867,7 +848,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     ParentColor = False
     ParentFont = False
   end
-  inherited ActionList1: TActionList[9]
+  inherited ActionList1: TActionList[8]
     inherited actIncluir: TAction
       OnExecute = actIncluirExecute
     end
@@ -881,10 +862,10 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Caption = 'actFinalizaPedido'
     end
   end
-  inherited dsPadrao: TDataSource[10]
+  inherited dsPadrao: TDataSource[9]
     DataSet = dtmGlobal.qryPedido
   end
-  object dsItens: TDataSource[11]
+  object dsItens: TDataSource[10]
     DataSet = dtmGlobal.qryItemPedido
     left = 760
     top = 224

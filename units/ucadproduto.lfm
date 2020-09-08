@@ -39,7 +39,6 @@ inherited frmCadProduto: TfrmCadProduto
       Top = 0
       Width = 39
       Caption = 'Código'
-      FocusControl = edtCodigo
       ParentColor = False
       Visible = False
     end
@@ -52,6 +51,18 @@ inherited frmCadProduto: TfrmCadProduto
       FocusControl = edtDescricao
       ParentColor = False
     end
+    object edtDescricao: TDBEdit
+      Left = 8
+      Height = 23
+      Top = 16
+      Width = 446
+      DataField = 'DESCRICAO'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+      OnKeyPress = edtDescricaoKeyPress
+    end
     object edtCodigo: TDBEdit
       Left = 472
       Height = 23
@@ -62,20 +73,7 @@ inherited frmCadProduto: TfrmCadProduto
       CharCase = ecNormal
       Enabled = False
       MaxLength = 0
-      TabOrder = 0
-      Visible = False
-    end
-    object edtDescricao: TDBEdit
-      Left = 8
-      Height = 23
-      Top = 16
-      Width = 446
-      DataField = 'DESCRICAO'
-      DataSource = dsPadrao
-      CharCase = ecNormal
-      MaxLength = 0
       TabOrder = 1
-      OnKeyPress = edtDescricaoKeyPress
     end
   end
   object Label3: TLabel[3]

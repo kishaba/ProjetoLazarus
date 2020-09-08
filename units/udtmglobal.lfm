@@ -84,7 +84,6 @@ object dtmGlobal: TdtmGlobal
     Params = <>
     Sequence.FieldName = 'CODPRODUTO'
     Sequence.SequenceName = 'GEN_CODPRODUTO'
-    Sequence.ApplyEvent = saeOnPost
     left = 48
     top = 88
     object qryProdutoCODPRODUTO: TLongintField
@@ -131,6 +130,7 @@ object dtmGlobal: TdtmGlobal
   end
   object qryPedido: TSQLQuery
     PacketRecords = -1
+    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'CODPEDIDO'
@@ -224,7 +224,6 @@ object dtmGlobal: TdtmGlobal
     Params = <>
     Sequence.FieldName = 'CODPEDIDO'
     Sequence.SequenceName = 'GEN_CODPEDIDO'
-    Sequence.ApplyEvent = saeOnPost
     left = 40
     top = 152
     object qryPedidoCODPEDIDO: TLongintField
@@ -298,7 +297,7 @@ object dtmGlobal: TdtmGlobal
     end
   end
   object transPedido: TSQLTransaction
-    Active = False
+    Active = True
     Action = caCommitRetaining
     Database = conexao
     left = 120

@@ -20,11 +20,10 @@ type
     btnPesquisaProduto: TImage;
     btnBuscaPedido: TImage;
     dsItens: TDataSource;
-    edtData: TDateTimePicker;
-    DBEdit7: TDBEdit;
     edtCodigo: TDBEdit;
     edtCodigoCliente: TDBEdit;
     edtCodigoProduto: TEdit;
+    edtData: TDateTimePicker;
     edtDesProduto: TEdit;
     edtNumeroPedido: TDBEdit;
     edtQuantidade: TEdit;
@@ -37,7 +36,6 @@ type
     grpPedido: TGroupBox;
     grpProduto: TGroupBox;
     btnExcluirProduto: TImage;
-    Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
@@ -63,6 +61,7 @@ type
     procedure btnExcluirProdutoClick(Sender: TObject);
     procedure btnGravarProdutoClick(Sender: TObject);
     procedure btnPesquisaProdutoClick(Sender: TObject);
+    procedure edtCodigoProdutoExit(Sender: TObject);
     procedure edtQuantidadeChange(Sender: TObject);
     procedure edtQuantidadeKeyPress(Sender: TObject; var Key: char);
     procedure edtValorUnitarioChange(Sender: TObject);
@@ -199,7 +198,7 @@ end;
 procedure TfrmLanPedidoVenda.limpacampos;
 var i: integer;
 begin
-  for I := 0 to ComponentCount-1 do
+  {for I := 0 to ComponentCount-1 do
   begin
     if Components[i] is TDBEdit then
     begin
@@ -209,7 +208,7 @@ begin
     begin
       TDBComboBox(Components[i]).Text    := '';
     end;
-  end;
+  end;}
 end;
 
 procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
@@ -222,13 +221,15 @@ end;
 procedure TfrmLanPedidoVenda.actEditaExecute(Sender: TObject);
 begin
   inherited;
-  edtCodigo.Enabled:=False;
   grpProduto.Enabled:=False;
 end;
 
 procedure TfrmLanPedidoVenda.actIncluirExecute(Sender: TObject);
 begin
+  dtmGlobal.transPedido.Active:=false;
+  dtmGlobal.transPedido.Active:=true;
   inherited;
+  edtNumeroPedido.SetFocus;
   dsItens.DataSet.close;
   grpProduto.Enabled:=False;
   limpacampos;
@@ -296,6 +297,12 @@ begin
   dtmGlobal.qryItemPedido.Open;
   dsItens.DataSet.post;
   TotalizaPedido;
+  edtCodigoProduto.Text:='';
+  edtDesProduto.Text:='';
+  edtValorUnitario.Text:='';
+  edtQuantidade.Text:='';
+  edtValorTotal.Text:='';
+  edtCodigoProduto.SetFocus;
 end;
 
 procedure TfrmLanPedidoVenda.btnPesquisaProdutoClick(Sender: TObject);
@@ -315,6 +322,20 @@ begin
       edtCodigoProduto.Clear;
   finally
     FreeAndNil(frmPesquisa);
+  end;
+end;
+
+procedure TfrmLanPedidoVenda.edtCodigoProdutoExit(Sender: TObject);
+begin
+  if edtCodigoProduto.Text <> '' then
+  begin
+    BuscaProduto(StrToInt(edtCodigoProduto.Text));
+    if edtDesProduto.Text ='' then
+    begin
+      ShowMessage('Produto nao encontrado, tente novamente');
+      edtCodigoProduto.SetFocus;
+      edtCodigoProduto.Text:='';
+    end;
   end;
 end;
 
