@@ -1,5 +1,5 @@
 inherited frmLanPedidoVenda: TfrmLanPedidoVenda
-  Left = 130
+  Left = 420
   Height = 832
   Top = 116
   Width = 896
@@ -18,19 +18,15 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     ClientHeight = 613
     inherited btnSalva: TImage
       Top = 400
-      Visible = True
     end
     inherited btnCancela: TImage
       Top = 472
-      Visible = True
     end
     inherited lblF5: TLabel
       Top = 440
-      Visible = True
     end
     inherited lblF6: TLabel
       Top = 509
-      Visible = True
     end
     object btnFinalizaPedido: TImage[10]
       Cursor = crHandPoint
