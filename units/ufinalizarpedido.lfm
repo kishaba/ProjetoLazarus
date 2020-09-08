@@ -1,34 +1,34 @@
 inherited frmFinalizaPedidoVenda: TfrmFinalizaPedidoVenda
-  Left = 402
-  Height = 539
-  Top = 200
-  Width = 465
-  ClientHeight = 539
-  ClientWidth = 465
+  Left = 293
+  Height = 479
+  Top = 190
+  Width = 463
+  ClientHeight = 479
+  ClientWidth = 463
   inherited Panel1: TPanel
-    Width = 465
+    Width = 463
     Caption = 'Finalizar Pedido'
   end
   inherited Panel2: TPanel
-    Height = 498
-    ClientHeight = 498
+    Height = 438
+    ClientHeight = 438
     inherited btnSalva: TImage
-      Top = 352
+      Top = 296
     end
     inherited btnCancela: TImage
-      Top = 432
+      Top = 368
     end
     inherited lblF5: TLabel
-      Top = 392
+      Top = 337
     end
     inherited lblF6: TLabel
-      Top = 472
+      Top = 408
     end
   end
   object grpTotalPedido: TGroupBox[2]
     Left = 96
     Height = 72
-    Top = 56
+    Top = 48
     Width = 352
     Caption = 'Total'
     ClientHeight = 52
@@ -69,7 +69,7 @@ inherited frmFinalizaPedidoVenda: TfrmFinalizaPedidoVenda
   object grpTotalPedido1: TGroupBox[3]
     Left = 96
     Height = 120
-    Top = 136
+    Top = 120
     Width = 352
     Caption = 'Pagamento'
     ClientHeight = 100
@@ -112,8 +112,8 @@ inherited frmFinalizaPedidoVenda: TfrmFinalizaPedidoVenda
   end
   object DBGrid1: TDBGrid[4]
     Left = 96
-    Height = 268
-    Top = 264
+    Height = 220
+    Top = 248
     Width = 352
     Color = clWindow
     Columns = <>

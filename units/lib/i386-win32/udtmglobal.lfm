@@ -130,7 +130,6 @@ object dtmGlobal: TdtmGlobal
   end
   object qryPedido: TSQLQuery
     PacketRecords = -1
-    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'CODPEDIDO'
@@ -169,6 +168,12 @@ object dtmGlobal: TdtmGlobal
         DataType = ftBCD
         Precision = 18
         Size = 4
+      end    
+      item
+        Name = 'STATUS'
+        DataType = ftString
+        Precision = -1
+        Size = 10
       end>
     AfterDelete = qryPedidoAfterDelete
     AfterPost = qryPedidoAfterPost
@@ -214,7 +219,8 @@ object dtmGlobal: TdtmGlobal
       '  DATAEMISSAO,'
       '  CODIGOCLIENTE,'
       '  TIPOPERACAO,'
-      '  TOTALPEDIDO'
+      '  TOTALPEDIDO,'
+      '  STATUS'
       'from PEDIDO'
       'where'
       '  CODPEDIDO = :CODPEDIDO and'
@@ -295,6 +301,16 @@ object dtmGlobal: TdtmGlobal
       MaxValue = 0
       MinValue = 0
     end
+    object qryPedidoSTATUS: TStringField
+      FieldKind = fkData
+      FieldName = 'STATUS'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
   end
   object transPedido: TSQLTransaction
     Active = True
@@ -343,6 +359,12 @@ object dtmGlobal: TdtmGlobal
         DataType = ftBCD
         Precision = 18
         Size = 4
+      end    
+      item
+        Name = 'STATUS'
+        DataType = ftString
+        Precision = -1
+        Size = 10
       end>
     Database = conexao
     Transaction = transConsultaPedido
@@ -443,13 +465,23 @@ object dtmGlobal: TdtmGlobal
       MaxValue = 0
       MinValue = 0
     end
+    object qryConsultaPedidoSTATUS: TStringField
+      FieldKind = fkData
+      FieldName = 'STATUS'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
   end
   object transConsultaPedido: TSQLTransaction
-    Active = False
+    Active = True
     Action = caCommitRetaining
     Database = conexao
-    left = 152
-    top = 216
+    left = 168
+    top = 224
   end
   object qryItemPedido: TSQLQuery
     PacketRecords = -1
@@ -820,10 +852,295 @@ object dtmGlobal: TdtmGlobal
     end
   end
   object transBuscaProximoItem: TSQLTransaction
-    Active = True
+    Active = False
     Action = caCommitRetaining
     Database = conexao
     left = 176
     top = 280
+  end
+  object qryParcelaPedido: TSQLQuery
+    PacketRecords = -1
+    FieldDefs = <    
+      item
+        Name = 'CODIGOPARCELA'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'CODIGOPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NUMEROPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'FORMAPAGAMENTO'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'DATAVENCIMENTO'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'VALORPARCELA'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end>
+    Database = conexao
+    Transaction = transParcelaPedido
+    SQL.Strings = (
+      'select * from parcelapedido'
+      'where'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO and'
+      '  CODIGOPEDIDO = :CODIGOPEDIDO'
+      ''
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO PARCELAPEDIDO (CODIGOPARCELA, CODIGOPEDIDO, NUMEROPEDIDO, FORMAPAGAMENTO, DATAVENCIMENTO, VALORPARCELA)'
+      'VALUES (:CODIGOPARCELA, :CODIGOPEDIDO, :NUMEROPEDIDO, :FORMAPAGAMENTO, :DATAVENCIMENTO, :VALORPARCELA);'
+    )
+    UpdateSQL.Strings = (
+      'update PEDIDO'
+      'set'
+      '  REFERENCIA = :REFERENCIA,'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO,'
+      '  DATAEMISSAO = :DATAEMISSAO,'
+      '  CODIGOCLIENTE = :CODIGOCLIENTE,'
+      '  TIPOPERACAO = :TIPOPERACAO,'
+      '  TOTALPEDIDO = :TOTALPEDIDO'
+      'where'
+      '  CODPEDIDO = :OLD_CODPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO'
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from PEDIDO'
+      'where'
+      '  CODPEDIDO = :OLD_CODPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO'
+      ''
+    )
+    RefreshSQL.Strings = (
+      'select * from parcelapedido'
+      'where'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO and'
+      '  CODIGOPEDIDO = :CODIGOPEDIDO and'
+      '  CODIGOPARCELA = :CODIGOPARCELA'
+      ''
+      ''
+      ''
+      ''
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'numeropedido'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'codigopedido'
+        ParamType = ptInput
+      end>
+    Sequence.FieldName = 'CODPEDIDO'
+    Sequence.SequenceName = 'GEN_CODPEDIDO'
+    left = 208
+    top = 152
+    object qryParcelaPedidoCODIGOPARCELA: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGOPARCELA'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryParcelaPedidoCODIGOPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'CODIGOPEDIDO'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryParcelaPedidoNUMEROPEDIDO: TLongintField
+      FieldKind = fkData
+      FieldName = 'NUMEROPEDIDO'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qryParcelaPedidoFORMAPAGAMENTO: TStringField
+      FieldKind = fkData
+      FieldName = 'FORMAPAGAMENTO'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryParcelaPedidoDATAVENCIMENTO: TDateField
+      FieldKind = fkData
+      FieldName = 'DATAVENCIMENTO'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qryParcelaPedidoVALORPARCELA: TBCDField
+      FieldKind = fkData
+      FieldName = 'VALORPARCELA'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 18
+      Currency = False
+      MaxValue = 0
+      MinValue = 0
+    end
+  end
+  object transParcelaPedido: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 320
+    top = 152
+  end
+  object qryEncerraPedido: TSQLQuery
+    PacketRecords = -1
+    FieldDefs = <    
+      item
+        Name = 'CODPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'REFERENCIA'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'NUMEROPEDIDO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'DATAEMISSAO'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'CODIGOCLIENTE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'TIPOPERACAO'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 1
+      end    
+      item
+        Name = 'TOTALPEDIDO'
+        DataType = ftBCD
+        Precision = 18
+        Size = 4
+      end>
+    AfterDelete = qryPedidoAfterDelete
+    AfterPost = qryPedidoAfterPost
+    Database = conexao
+    Transaction = transEncerraPedido
+    SQL.Strings = (
+      'update pedido set'
+      'status = :status'
+      'where pedido.codpedido = :codpedido'
+      'and   pedido.numeropedido = :numeropedido'
+    )
+    InsertSQL.Strings = (
+      'insert into PEDIDO'
+      '  (CODPEDIDO,REFERENCIA, NUMEROPEDIDO, DATAEMISSAO, CODIGOCLIENTE, TIPOPERACAO, TOTALPEDIDO)'
+      'values'
+      '  (:CODPEDIDO,:REFERENCIA, :NUMEROPEDIDO, :DATAEMISSAO, :CODIGOCLIENTE, :TIPOPERACAO,'
+      '   :TOTALPEDIDO)'
+      ''
+    )
+    UpdateSQL.Strings = (
+      'update PEDIDO'
+      'set'
+      '  REFERENCIA = :REFERENCIA,'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO,'
+      '  DATAEMISSAO = :DATAEMISSAO,'
+      '  CODIGOCLIENTE = :CODIGOCLIENTE,'
+      '  TIPOPERACAO = :TIPOPERACAO,'
+      '  TOTALPEDIDO = :TOTALPEDIDO'
+      'where'
+      '  CODPEDIDO = :OLD_CODPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO'
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from PEDIDO'
+      'where'
+      '  CODPEDIDO = :OLD_CODPEDIDO and'
+      '  NUMEROPEDIDO = :OLD_NUMEROPEDIDO'
+      ''
+    )
+    RefreshSQL.Strings = (
+      'Select'
+      '  CODPEDIDO,'
+      '  REFERENCIA,'
+      '  NUMEROPEDIDO,'
+      '  DATAEMISSAO,'
+      '  CODIGOCLIENTE,'
+      '  TIPOPERACAO,'
+      '  TOTALPEDIDO'
+      'from PEDIDO'
+      'where'
+      '  CODPEDIDO = :CODPEDIDO and'
+      '  NUMEROPEDIDO = :NUMEROPEDIDO'
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'status'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'codpedido'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'numeropedido'
+        ParamType = ptInput
+      end>
+    Sequence.FieldName = 'CODPEDIDO'
+    Sequence.SequenceName = 'GEN_CODPEDIDO'
+    left = 272
+    top = 232
+  end
+  object transEncerraPedido: TSQLTransaction
+    Active = False
+    Action = caCommitRetaining
+    Database = conexao
+    left = 384
+    top = 232
   end
 end

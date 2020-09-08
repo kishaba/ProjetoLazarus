@@ -72,6 +72,7 @@ procedure TfrmPrincipal.pnpPedidoVendaClick(Sender: TObject);
 begin
   try
    frmLanPedidoVenda := TfrmLanPedidoVenda.Create(self);
+   frmLanPedidoVenda.edtTipoOperacao.Text := 'S';
    frmLanPedidoVenda.ShowModal
   finally
     FreeAndNil(frmLanPedidoVenda);

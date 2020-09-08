@@ -37,7 +37,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Left = 8
       Height = 60
       Hint = 'Cancelar'
-      Top = 503
+      Top = 504
       Width = 60
       Align = alCustom
       OnClick = btnFinalizaPedidoClick
@@ -146,6 +146,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       }
       ShowHint = True
       Stretch = True
+      Visible = False
     end
     object lblF10: TLabel[11]
       Left = 8
@@ -159,6 +160,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
+      Visible = False
     end
   end
   object grpPedido: TGroupBox[2]
@@ -238,11 +240,12 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     object edtTipoOperacao: TDBEdit
       Left = 352
       Height = 23
-      Top = 12
+      Top = 14
       Width = 29
       DataField = 'TIPOPERACAO'
       DataSource = dsPadrao
       CharCase = ecNormal
+      Enabled = False
       MaxLength = 0
       TabOrder = 3
     end
@@ -375,6 +378,27 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       HideDateTimeParts = []
       MonthNames = 'Long'
     end
+    object Label14: TLabel
+      Left = 448
+      Height = 15
+      Top = 0
+      Width = 45
+      Caption = 'Situação'
+      FocusControl = edtTipoOperacao
+      ParentColor = False
+    end
+    object edtSituacao: TDBEdit
+      Left = 448
+      Height = 23
+      Top = 16
+      Width = 134
+      DataField = 'STATUS'
+      DataSource = dsPadrao
+      CharCase = ecNormal
+      Enabled = False
+      MaxLength = 0
+      TabOrder = 5
+    end
   end
   object frmLanPedidoVenda: TGroupBox[3]
     Left = 90
@@ -407,7 +431,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     end
   end
   object grpProduto: TGroupBox[4]
-    Left = 96
+    Left = 90
     Height = 124
     Top = 192
     Width = 795
@@ -849,6 +873,7 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
     ParentFont = False
   end
   inherited ActionList1: TActionList[8]
+    left = 24
     inherited actIncluir: TAction
       OnExecute = actIncluirExecute
     end

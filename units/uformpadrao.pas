@@ -125,7 +125,6 @@ end;
 
 procedure TfrmPadrao.actEditaExecute(Sender: TObject);
 begin
-  dsPadrao.DataSet.Open;
   dsPadrao.DataSet.Edit;
   ControlaBotoes;
   HabilitaEdicao(true);

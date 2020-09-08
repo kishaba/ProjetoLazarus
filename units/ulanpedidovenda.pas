@@ -28,6 +28,7 @@ type
     edtNumeroPedido: TDBEdit;
     edtQuantidade: TEdit;
     edtReferencia: TDBEdit;
+    edtSituacao: TDBEdit;
     edtTipoOperacao: TDBEdit;
     edtValorTotal: TEdit;
     edtValorUnitario: TEdit;
@@ -40,6 +41,7 @@ type
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
+    Label14: TLabel;
     lblF10: TLabel;
     lblValorTotal: TLabel;
     Label2: TLabel;
@@ -88,7 +90,7 @@ implementation
 
 {$R *.lfm}
 uses
-  uPesquisa, uDtmGlobal,uFinalizarPedido;
+  uPesquisa, uDtmGlobal,uFinalizarPedido, uEncerraPedido;
 
 { TfrmLanPedidoVenda }
 
@@ -117,12 +119,9 @@ begin
   edtData.Date := dtmGlobal.qryConsultaPedidoDATAEMISSAO.AsDateTime;
   edtTipoOperacao.Text := dtmGlobal.qryConsultaPedidoTIPOPERACAO.AsString;
   edtCodigoCliente.Text := dtmGlobal.qryConsultaPedidoCODIGOCLIENTE.AsString;
-  if edtNumeroPedido.Text <> '' then
+  edtSituacao.Text:=dtmGlobal.qryConsultaPedidoSTATUS.AsString;
+  if (edtNumeroPedido.Text <> '')then
   begin
-    grdProdutos.Enabled := True;
-    edtCodigoProduto.Enabled := True;
-    edtValorUnitario.Enabled := True;
-    edtQuantidade.Enabled := True;
     dsItens.DataSet.Open;
     dtmGlobal.qryItemPedido.Close;
     dtmGlobal.qryItemPedido.ParamByName('codpedido').AsInteger :=
@@ -130,6 +129,25 @@ begin
     dtmGlobal.qryItemPedido.ParamByName('numeropedido').AsInteger :=
       dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
     dtmGlobal.qryItemPedido.Open;
+    if dtmGlobal.qryItemPedido.RecordCount > 0 then
+      btnFinalizaPedido.Visible:=true;
+  end;
+  IF edtSituacao.Text = 'ABERTO' THEN
+  begin
+    grdProdutos.Enabled := True;
+    edtCodigoProduto.Enabled := True;
+    edtValorUnitario.Enabled := True;
+    edtQuantidade.Enabled := True;
+  end
+  else
+  begin
+    grdProdutos.Enabled := false;
+    edtCodigoProduto.Enabled := false;
+    edtValorUnitario.Enabled := false;
+    edtQuantidade.Enabled := false;
+    btnPesquisaProduto.Enabled:=false;
+    btnGravarProduto.Enabled:=false;
+    btnExcluirProduto.Enabled:=false;
   end;
 end;
 
@@ -220,8 +238,16 @@ end;
 
 procedure TfrmLanPedidoVenda.actEditaExecute(Sender: TObject);
 begin
-  inherited;
-  grpProduto.Enabled:=False;
+  if edtSituacao.Text ='FECHADO' THEN
+  BEGIN
+   ShowMessage('Nao é possivel editar um pedido já finalizado');
+  end
+  ELSE
+  BEGIN
+    dsPadrao.DataSet.open;
+    inherited;
+    grpProduto.Enabled:=False;
+  end;
 end;
 
 procedure TfrmLanPedidoVenda.actIncluirExecute(Sender: TObject);
@@ -229,6 +255,10 @@ begin
   dtmGlobal.transPedido.Active:=false;
   dtmGlobal.transPedido.Active:=true;
   inherited;
+  edtSituacao.Text:='ABERTO';
+  edtTipoOperacao.Text:='S';
+  edtSituacao.Enabled:=FALSE;
+  edtTipoOperacao.Enabled:=FALSE;
   edtNumeroPedido.SetFocus;
   dsItens.DataSet.close;
   grpProduto.Enabled:=False;
@@ -256,7 +286,9 @@ end;
 
 procedure TfrmLanPedidoVenda.btnFinalizaPedidoClick(Sender: TObject);
 begin
-  frmFinalizaPedidoVenda.ShowModal;
+  frmEncerraPedido.edtFormaPagamento.Text:= 'A VISTA';
+  frmEncerraPedido.lblTotalPedido.Caption:=lblValorTotal.Caption;
+  frmEncerraPedido.ShowModal;
 end;
 
 procedure TfrmLanPedidoVenda.btnExcluirProdutoClick(Sender: TObject);

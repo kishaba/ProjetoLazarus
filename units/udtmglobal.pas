@@ -22,6 +22,7 @@ type
     qryConsultaPedidoDATAEMISSAO: TDateField;
     qryConsultaPedidoNUMEROPEDIDO: TLongintField;
     qryConsultaPedidoREFERENCIA: TStringField;
+    qryConsultaPedidoSTATUS: TStringField;
     qryConsultaPedidoTIPOPERACAO: TStringField;
     qryConsultaPedidoTOTALPEDIDO: TBCDField;
     qryBuscaProdutoCODPRODUTO: TLongintField;
@@ -36,11 +37,20 @@ type
     qryItemPedidoQUANTIDADE: TBCDField;
     qryItemPedidoVALORTOTALITEM: TBCDField;
     qryItemPedidoVALORUNITARIO: TBCDField;
+    qryParcelaPedido: TSQLQuery;
+    qryParcelaPedidoCODIGOPARCELA: TLongintField;
+    qryParcelaPedidoCODIGOPEDIDO: TLongintField;
+    qryParcelaPedidoDATAVENCIMENTO: TDateField;
+    qryParcelaPedidoFORMAPAGAMENTO: TStringField;
+    qryParcelaPedidoNUMEROPEDIDO: TLongintField;
+    qryParcelaPedidoVALORPARCELA: TBCDField;
+    qryEncerraPedido: TSQLQuery;
     qryPedidoCODIGOCLIENTE: TLongintField;
     qryPedidoCODPEDIDO: TLongintField;
     qryPedidoDATAEMISSAO: TDateField;
     qryPedidoNUMEROPEDIDO: TLongintField;
     qryPedidoREFERENCIA: TStringField;
+    qryPedidoSTATUS: TStringField;
     qryPedidoTIPOPERACAO: TStringField;
     qryPedidoTOTALPEDIDO: TBCDField;
     qryProduto: TSQLQuery;
@@ -53,6 +63,8 @@ type
     transConsultaProduto: TSQLTransaction;
     transBuscaProximoItem: TSQLTransaction;
     transItemPedido: TSQLTransaction;
+    transParcelaPedido: TSQLTransaction;
+    transEncerraPedido: TSQLTransaction;
     transProduto: TSQLTransaction;
     transPedido: TSQLTransaction;
     procedure DataModuleCreate(Sender: TObject);
@@ -89,6 +101,7 @@ begin
   qryConsultaPedido.Transaction:=transConsultaPedido;
   qryBuscaProximoItemPedido.Transaction:=transBuscaProximoItem;
   qryBuscaProduto.Transaction:=transConsultaProduto;
+  qryParcelaPedido.Transaction:=transParcelaPedido;
 end;
 
 procedure TdtmGlobal.qryPedidoAfterDelete(DataSet: TDataSet);

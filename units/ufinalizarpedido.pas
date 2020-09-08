@@ -25,6 +25,7 @@ type
     procedure edtNumerosParcelasChange(Sender: TObject);
 
   private
+
     procedure CalculaParcelas;
 
 
