@@ -257,7 +257,8 @@ procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
 begin
   dsPadrao.DataSet.FieldByName('DATAEMISSAO').AsDateTime := edtData.Date;
   inherited;
-//  grpProduto.Enabled:=true;
+  grpProduto.Enabled:=true;
+   btnPesquisaProduto.Enabled:=true;
   BuscaPedido(StrToInt(edtCodigo.text));
   btnBuscaPedido.Enabled:=true;
 end;
