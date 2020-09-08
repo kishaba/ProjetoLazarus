@@ -530,6 +530,7 @@ object dtmGlobal: TdtmGlobal
         Precision = 18
         Size = 4
       end>
+    AfterDelete = qryItemPedidoAfterDelete
     AfterPost = qryItemPedidoAfterPost
     Database = conexao
     Transaction = transItemPedido

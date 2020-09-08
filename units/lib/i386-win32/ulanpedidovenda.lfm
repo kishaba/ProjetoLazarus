@@ -124,20 +124,6 @@ inherited frmLanPedidoVenda: TfrmLanPedidoVenda
       Stretch = True
       Visible = False
     end
-    object lblF10: TLabel[11]
-      Left = 8
-      Height = 19
-      Top = 584
-      Width = 19
-      Caption = 'F7'
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
   end
   object grpPedido: TGroupBox[2]
     Left = 90
