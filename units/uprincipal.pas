@@ -14,7 +14,6 @@ type
   TfrmPrincipal = class(TForm)
     Image1: TImage;
     Image2: TImage;
-    Image3: TImage;
     Image4: TImage;
     Image5: TImage;
     Image7: TImage;
@@ -25,7 +24,6 @@ type
     pnpCadastros: TPanel;
     pnpCadClientes: TPanel;
     pnpCadProdutos: TPanel;
-    pnpPedidoCompra: TPanel;
     pnpPedidoVenda: TPanel;
     pnpPrincipal: TPanel;
     pnpSair: TPanel;
