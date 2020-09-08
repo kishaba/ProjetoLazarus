@@ -20,6 +20,7 @@ type
     btnPesquisaProduto: TImage;
     btnBuscaPedido: TImage;
     dsItens: TDataSource;
+    dsParcelaPedido: TDataSource;
     edtCodigo: TDBEdit;
     edtCodigoCliente: TDBEdit;
     edtCodigoProduto: TEdit;
@@ -34,6 +35,7 @@ type
     edtValorUnitario: TEdit;
     grdProdutos: TDBGrid;
     frmLanPedidoVenda: TGroupBox;
+    grdParcelas: TDBGrid;
     grpPedido: TGroupBox;
     grpProduto: TGroupBox;
     btnExcluirProduto: TImage;
@@ -42,7 +44,6 @@ type
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    lblF10: TLabel;
     lblValorTotal: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -55,6 +56,7 @@ type
     lblValorTotal1: TLabel;
     lblValorTotal2: TLabel;
     Panel3: TPanel;
+    procedure actCancelarExecute(Sender: TObject);
     procedure actEditaExecute(Sender: TObject);
     procedure actIncluirExecute(Sender: TObject);
     procedure actSalvarExecute(Sender: TObject);
@@ -125,11 +127,14 @@ begin
   begin
     dsItens.DataSet.Open;
     dtmGlobal.qryItemPedido.Close;
-    dtmGlobal.qryItemPedido.ParamByName('codpedido').AsInteger :=
-      dtmGlobal.qryConsultaPedidoCODPEDIDO.AsInteger;
-    dtmGlobal.qryItemPedido.ParamByName('numeropedido').AsInteger :=
-      dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
+    dtmGlobal.qryItemPedido.ParamByName('codpedido').AsInteger :=dtmGlobal.qryConsultaPedidoCODPEDIDO.AsInteger;
+    dtmGlobal.qryItemPedido.ParamByName('numeropedido').AsInteger :=dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
     dtmGlobal.qryItemPedido.Open;
+    dsParcelaPedido.DataSet.open;
+    dtmGlobal.qryParcelaPedido.Close;
+    dtmGlobal.qryParcelaPedido.ParamByName('codigopedido').AsInteger :=dtmGlobal.qryConsultaPedidoCODPEDIDO.AsInteger;
+    dtmGlobal.qryParcelaPedido.ParamByName('numeropedido').AsInteger :=dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
+    dtmGlobal.qryParcelaPedido.Open;
 
   end;
   IF edtSituacao.Text = 'ABERTO' THEN
@@ -143,6 +148,7 @@ begin
     btnExcluirProduto.Enabled:=true;
     if dtmGlobal.qryItemPedido.RecordCount > 0 then
       btnFinalizaPedido.Visible:=true;
+    grdParcelas.Visible:=false;
   end
   else
   begin
@@ -154,6 +160,7 @@ begin
     btnGravarProduto.Enabled:=false;
     btnExcluirProduto.Enabled:=false;
     btnFinalizaPedido.Visible:=FALSE;
+    grdParcelas.Visible:=true;
     DesativaCampos;
   end;
 end;
@@ -225,17 +232,8 @@ end;
 procedure TfrmLanPedidoVenda.LimpaCampos;
 var i: integer;
 begin
- for I := 0 to ComponentCount-1 do
-  begin
-    if Components[i] is TDBEdit then
-    begin
-      TDBEdit(Components[i]).Text    := '';
-    end
-    else if Components[i] is TEdit then
-    begin
-      TDBComboBox(Components[i]).Text    := '';
-    end;
-  end;
+  lblValorTotal.Caption:='0';
+  grdParcelas.Visible:=false;
 end;
 
 procedure TfrmLanPedidoVenda.DesativaCampos;
@@ -258,7 +256,9 @@ procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
 begin
   dsPadrao.DataSet.FieldByName('DATAEMISSAO').AsDateTime := edtData.Date;
   inherited;
-  grpProduto.Enabled:=true;
+//  grpProduto.Enabled:=true;
+  BuscaPedido(StrToInt(edtCodigo.text));
+  btnBuscaPedido.Enabled:=true;
 end;
 
 procedure TfrmLanPedidoVenda.actEditaExecute(Sender: TObject);
@@ -283,10 +283,17 @@ begin
   end;
 end;
 
+procedure TfrmLanPedidoVenda.actCancelarExecute(Sender: TObject);
+begin
+  inherited;
+  btnBuscaPedido.Enabled:=true;
+end;
+
 procedure TfrmLanPedidoVenda.actIncluirExecute(Sender: TObject);
 begin
   dtmGlobal.transPedido.Active:=false;
   dtmGlobal.transPedido.Active:=true;
+  btnBuscaPedido.Enabled:=false;
   inherited;
   edtSituacao.Text:='ABERTO';
   edtTipoOperacao.Text:='S';

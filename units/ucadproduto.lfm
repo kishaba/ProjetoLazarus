@@ -74,6 +74,7 @@ inherited frmCadProduto: TfrmCadProduto
       Enabled = False
       MaxLength = 0
       TabOrder = 1
+      Visible = False
     end
   end
   object Label3: TLabel[3]
