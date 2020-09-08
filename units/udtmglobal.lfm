@@ -184,10 +184,10 @@ object dtmGlobal: TdtmGlobal
     )
     InsertSQL.Strings = (
       'insert into PEDIDO'
-      '  (CODPEDIDO,REFERENCIA, NUMEROPEDIDO, DATAEMISSAO, CODIGOCLIENTE, TIPOPERACAO, TOTALPEDIDO)'
+      '  (CODPEDIDO,REFERENCIA, NUMEROPEDIDO, DATAEMISSAO, CODIGOCLIENTE, TIPOPERACAO, TOTALPEDIDO, STATUS)'
       'values'
       '  (:CODPEDIDO,:REFERENCIA, :NUMEROPEDIDO, :DATAEMISSAO, :CODIGOCLIENTE, :TIPOPERACAO,'
-      '   :TOTALPEDIDO)'
+      '   :TOTALPEDIDO,:STATUS)'
       ''
     )
     UpdateSQL.Strings = (
@@ -955,6 +955,8 @@ object dtmGlobal: TdtmGlobal
     left = 208
     top = 152
     object qryParcelaPedidoCODIGOPARCELA: TLongintField
+      DisplayLabel = 'Código Parcela'
+      DisplayWidth = 2
       FieldKind = fkData
       FieldName = 'CODIGOPARCELA'
       Index = 0
@@ -964,6 +966,8 @@ object dtmGlobal: TdtmGlobal
       Required = True
     end
     object qryParcelaPedidoCODIGOPEDIDO: TLongintField
+      DisplayLabel = 'Código Pedido'
+      DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'CODIGOPEDIDO'
       Index = 1
@@ -973,6 +977,8 @@ object dtmGlobal: TdtmGlobal
       Required = True
     end
     object qryParcelaPedidoNUMEROPEDIDO: TLongintField
+      DisplayLabel = 'Número Pedido'
+      DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'NUMEROPEDIDO'
       Index = 2
@@ -982,6 +988,8 @@ object dtmGlobal: TdtmGlobal
       Required = True
     end
     object qryParcelaPedidoFORMAPAGAMENTO: TStringField
+      DisplayLabel = 'Forma Pagamento'
+      DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'FORMAPAGAMENTO'
       Index = 3
@@ -991,6 +999,7 @@ object dtmGlobal: TdtmGlobal
       Required = False
     end
     object qryParcelaPedidoDATAVENCIMENTO: TDateField
+      DisplayLabel = 'Data Vencimento'
       FieldKind = fkData
       FieldName = 'DATAVENCIMENTO'
       Index = 4
@@ -1000,6 +1009,8 @@ object dtmGlobal: TdtmGlobal
       Required = False
     end
     object qryParcelaPedidoVALORPARCELA: TBCDField
+      DisplayLabel = 'Valor Parcela'
+      DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'VALORPARCELA'
       Index = 5
@@ -1067,7 +1078,8 @@ object dtmGlobal: TdtmGlobal
     Transaction = transEncerraPedido
     SQL.Strings = (
       'update pedido set'
-      'status = :status'
+      'status = :status,'
+      'totalpedido = :totalpedido'
       'where pedido.codpedido = :codpedido'
       'and   pedido.numeropedido = :numeropedido'
     )
@@ -1119,6 +1131,11 @@ object dtmGlobal: TdtmGlobal
       item
         DataType = ftUnknown
         Name = 'status'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'totalpedido'
         ParamType = ptInput
       end    
       item

@@ -77,7 +77,8 @@ type
     function TiraMascaraFloat(sValor: string): string;
     procedure CalculaTotais;
     procedure TotalizaPedido;
-    procedure limpacampos;
+    procedure LimpaCampos;
+    procedure DesativaCampos;
 
   public
     fTotal: currency;
@@ -110,10 +111,10 @@ end;
 
 procedure TfrmLanPedidoVenda.BuscaPedido(CodPedido: integer);
 begin
+  dtmGlobal.transConsultaPedido.Active:=FALSE;
   dtmGlobal.qryConsultaPedido.Close;
   dtmGlobal.qryConsultaPedido.ParamByName('codpedido').AsInteger := CodPedido;
   dtmGlobal.qryConsultaPedido.Open;
-
   edtReferencia.Text := dtmGlobal.qryConsultaPedidoREFERENCIA.AsString;
   edtNumeroPedido.Text := dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsString;
   edtData.Date := dtmGlobal.qryConsultaPedidoDATAEMISSAO.AsDateTime;
@@ -129,8 +130,7 @@ begin
     dtmGlobal.qryItemPedido.ParamByName('numeropedido').AsInteger :=
       dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
     dtmGlobal.qryItemPedido.Open;
-    if dtmGlobal.qryItemPedido.RecordCount > 0 then
-      btnFinalizaPedido.Visible:=true;
+
   end;
   IF edtSituacao.Text = 'ABERTO' THEN
   begin
@@ -138,6 +138,11 @@ begin
     edtCodigoProduto.Enabled := True;
     edtValorUnitario.Enabled := True;
     edtQuantidade.Enabled := True;
+    btnPesquisaProduto.Enabled:=true;
+    btnGravarProduto.Enabled:=true;
+    btnExcluirProduto.Enabled:=true;
+    if dtmGlobal.qryItemPedido.RecordCount > 0 then
+      btnFinalizaPedido.Visible:=true;
   end
   else
   begin
@@ -148,6 +153,8 @@ begin
     btnPesquisaProduto.Enabled:=false;
     btnGravarProduto.Enabled:=false;
     btnExcluirProduto.Enabled:=false;
+    btnFinalizaPedido.Visible:=FALSE;
+    DesativaCampos;
   end;
 end;
 
@@ -211,12 +218,14 @@ begin
   end;
   //recebe o valor
   lblValorTotal.Caption := FormatFloat('#,##0.00', ftotal);
+  IF fTotal = 0 THEN
+    btnFinalizaPedido.Visible:=FALSE;
 end;
 
-procedure TfrmLanPedidoVenda.limpacampos;
+procedure TfrmLanPedidoVenda.LimpaCampos;
 var i: integer;
 begin
-  {for I := 0 to ComponentCount-1 do
+ for I := 0 to ComponentCount-1 do
   begin
     if Components[i] is TDBEdit then
     begin
@@ -226,7 +235,23 @@ begin
     begin
       TDBComboBox(Components[i]).Text    := '';
     end;
-  end;}
+  end;
+end;
+
+procedure TfrmLanPedidoVenda.DesativaCampos;
+var i: integer;
+begin
+ for I := 0 to ComponentCount-1 do
+  begin
+    if Components[i] is TDBEdit then
+    begin
+      TDBEdit(Components[i]).Enabled   := false;
+    end
+    else if Components[i] is TEdit then
+    begin
+      TDBComboBox(Components[i]).Enabled  := false;
+    end;
+  end;
 end;
 
 procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
@@ -244,7 +269,15 @@ begin
   end
   ELSE
   BEGIN
+    BuscaPedido(StrToInt(edtCodigo.Text));
     dsPadrao.DataSet.open;
+    dsPadrao.DataSet.Edit;
+    dtmGlobal.qryPedidoREFERENCIA.AsString:=dtmGlobal.qryConsultaPedidoREFERENCIA.AsString;
+    dtmGlobal.qryPedidoNUMEROPEDIDO.AsInteger:=dtmGlobal.qryConsultaPedidoNUMEROPEDIDO.AsInteger;
+    dtmGlobal.qryPedidoCODPEDIDO.AsInteger:=dtmGlobal.qryConsultaPedidoCODPEDIDO.AsInteger ;
+    dtmGlobal.qryPedidoDATAEMISSAO.AsDateTime:=dtmGlobal.qryConsultaPedidoDATAEMISSAO.AsDateTime;
+    dtmGlobal.qryPedidoCODIGOCLIENTE.AsInteger:=dtmGlobal.qryConsultaPedidoCODIGOCLIENTE.AsInteger;
+    dtmGlobal.qryPedidoSTATUS.AsString:=dtmGlobal.qryConsultaPedidoSTATUS.AsString;
     inherited;
     grpProduto.Enabled:=False;
   end;
@@ -286,9 +319,16 @@ end;
 
 procedure TfrmLanPedidoVenda.btnFinalizaPedidoClick(Sender: TObject);
 begin
-  frmEncerraPedido.edtFormaPagamento.Text:= 'A VISTA';
-  frmEncerraPedido.lblTotalPedido.Caption:=lblValorTotal.Caption;
-  frmEncerraPedido.ShowModal;
+  TRY
+    frmEncerraPedido.edtFormaPagamento.Text:= 'A VISTA';
+    frmEncerraPedido.lblTotalPedido.Caption:=lblValorTotal.Caption;
+    frmEncerraPedido.edtValorParcela.Text:=lblValorTotal.Caption;
+    frmEncerraPedido.lblNumeroPedido.Caption:=edtNumeroPedido.Text;
+    frmEncerraPedido.lblCodigoPedido.Caption:=edtCodigo.Text;
+    frmEncerraPedido.ShowModal;
+  finally
+    BuscaPedido(StrToInt(edtCodigo.Text));
+  end;
 end;
 
 procedure TfrmLanPedidoVenda.btnExcluirProdutoClick(Sender: TObject);
@@ -328,6 +368,7 @@ begin
   dtmGlobal.qryItemPedidoITEMPEDIDO.AsInteger :=dtmGlobal.qryBuscaProximoItemPedidoNOVOITEM.AsInteger;
   dtmGlobal.qryItemPedido.Open;
   dsItens.DataSet.post;
+  btnFinalizaPedido.Visible:=TRUE;
   TotalizaPedido;
   edtCodigoProduto.Text:='';
   edtDesProduto.Text:='';

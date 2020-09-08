@@ -2,15 +2,15 @@ object frmEncerraPedido: TfrmEncerraPedido
   Left = 167
   Height = 542
   Top = 126
-  Width = 801
+  Width = 913
   ClientHeight = 542
-  ClientWidth = 801
+  ClientWidth = 913
   LCLVersion = '1.8.2.0'
   object Panel1: TPanel
     Left = 0
     Height = 41
     Top = 0
-    Width = 801
+    Width = 913
     Align = alTop
     BevelOuter = bvNone
     Caption = 'Finalizar Pedido'
@@ -27,15 +27,15 @@ object frmEncerraPedido: TfrmEncerraPedido
     Left = 96
     Height = 72
     Top = 48
-    Width = 696
+    Width = 800
     Caption = 'Total'
     ClientHeight = 52
-    ClientWidth = 692
+    ClientWidth = 796
     TabOrder = 1
     object Label1: TLabel
-      Left = 8
+      Left = 384
       Height = 24
-      Top = 17
+      Top = 0
       Width = 111
       Caption = 'Valor Total:'
       Font.CharSet = ANSI_CHARSET
@@ -48,9 +48,71 @@ object frmEncerraPedido: TfrmEncerraPedido
       ParentFont = False
     end
     object lblTotalPedido: TLabel
-      Left = 152
+      Left = 504
       Height = 24
-      Top = 16
+      Top = 0
+      Width = 66
+      Caption = '300,00'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlue
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 16
+      Height = 24
+      Top = 0
+      Width = 162
+      Caption = 'Numero Pedido:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblNumeroPedido: TLabel
+      Left = 192
+      Height = 24
+      Top = 0
+      Width = 66
+      Caption = '300,00'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlue
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 16
+      Height = 24
+      Top = 28
+      Width = 155
+      Caption = 'Código Pedido:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -21
+      Font.Name = 'Arial'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object lblCodigoPedido: TLabel
+      Left = 192
+      Height = 24
+      Top = 27
       Width = 66
       Caption = '300,00'
       Font.CharSet = ANSI_CHARSET
@@ -68,10 +130,10 @@ object frmEncerraPedido: TfrmEncerraPedido
     Left = 96
     Height = 144
     Top = 128
-    Width = 688
+    Width = 800
     Caption = 'Pagamento'
     ClientHeight = 124
-    ClientWidth = 684
+    ClientWidth = 796
     TabOrder = 2
     object UpDown1: TUpDown
       Left = 136
@@ -420,7 +482,7 @@ object frmEncerraPedido: TfrmEncerraPedido
     Left = 96
     Height = 244
     Top = 288
-    Width = 696
+    Width = 800
     Color = clWindow
     Columns = <>
     DataSource = dsPadrao

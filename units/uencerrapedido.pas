@@ -25,6 +25,8 @@ type
     grpTotalPedido: TGroupBox;
     grpTotalPedido1: TGroupBox;
     Label1: TLabel;
+    Label2: TLabel;
+    Label5: TLabel;
     lblTotalPedido: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -34,6 +36,8 @@ type
     lblF4: TLabel;
     lblF5: TLabel;
     lblF6: TLabel;
+    lblNumeroPedido: TLabel;
+    lblCodigoPedido: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
     UpDown1: TUpDown;
@@ -78,8 +82,8 @@ begin
     dtmGlobal.qryParcelaPedido.Append;
     dtmGlobal.qryParcelaPedidoCODIGOPARCELA.AsInteger := i;
     dtmGlobal.qryParcelaPedidoFORMAPAGAMENTO.AsString :=edtFormaPagamento.Text;
-    dtmGlobal.qryParcelaPedidoNUMEROPEDIDO.AsInteger  :=2;
-    dtmGlobal.qryParcelaPedidoCODIGOPEDIDO.AsInteger  :=4;
+    dtmGlobal.qryParcelaPedidoNUMEROPEDIDO.AsInteger  :=StrToInt(lblNumeroPedido.Caption);
+    dtmGlobal.qryParcelaPedidoCODIGOPEDIDO.AsInteger  :=StrToInt(lblCodigoPedido.Caption);
     dtmGlobal.qryParcelaPedidoDATAVENCIMENTO.AsDateTime:=Now+(i*StrToIntDef(edtIntervaloParcelas.Text,0));
     dtmGlobal.qryParcelaPedidoVALORPARCELA.AsCurrency:=StrToCurr(edtValorParcela.Text);
     dtmGlobal.qryParcelaPedido.Post;
@@ -130,16 +134,13 @@ end;
 procedure TfrmEncerraPedido.EncerraPedido;
 begin
 
-  {dtmGlobal.qryEncerraPedido.close;
-  dtmGlobal.transEncerraPedido.Active:=true;
-  dtmGlobal.qryEncerraPedido.Edit;
+  dtmGlobal.qryEncerraPedido.close;
   dtmGlobal.qryEncerraPedido.ParamByName('status').AsString:='FECHADO';
-  dtmGlobal.qryEncerraPedido.ParamByName('codpedido').AsInteger:=4;
-  dtmGlobal.qryEncerraPedido.ParamByName('numeropedido').AsInteger:=2;
+  dtmGlobal.qryEncerraPedido.ParamByName('totalpedido').AsCurrency:=StrToCurr(lblTotalPedido.Caption);
+  dtmGlobal.qryEncerraPedido.ParamByName('codpedido').AsInteger:= StrToInt(lblCodigoPedido.Caption);
+  dtmGlobal.qryEncerraPedido.ParamByName('numeropedido').AsInteger:=StrToInt(lblNumeroPedido.Caption);
   dtmGlobal.qryEncerraPedido.ExecSQL;
-   dtmGlobal.qryEncerraPedido.Post;
-  dtmGlobal.qryEncerraPedido.ApplyUpdates;
-  dtmGlobal.transEncerraPedido.CommitRetaining;}
+  dtmGlobal.transEncerraPedido.CommitRetaining;
 end;
 
 end.
