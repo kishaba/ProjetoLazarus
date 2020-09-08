@@ -129,7 +129,10 @@ end;
 procedure TfrmCadProduto.actSalvarExecute(Sender: TObject);
 begin
   edtlocalizar.Text:=edtDescricao.Text;
-  inherited;
+  if edtDescricao.Text = trim('') then
+     ShowMessage('Produto deve ter uma descrição')
+  else
+     inherited;
   grdConsulta.Enabled := true;
 end;
 
@@ -156,7 +159,6 @@ begin
   dsPadrao.DataSet.Open;
   edtlocalizar.SetFocus;
 end;
-
 
 end.
 
