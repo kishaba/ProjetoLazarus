@@ -442,7 +442,7 @@ end;
 
 procedure TfrmLanPedidoVenda.btnPesquisaProdutoClick(Sender: TObject);
 begin
-  frmPesquisa := tfrmPesquisa.Create(self, ['codproduto', 'descricao','situacao'],
+  frmPesquisa := tfrmPesquisa.Create(self, ['codproduto','situacao', 'descricao'],
     'produto', 'codproduto');
   try
     if frmPesquisa.ShowModal = mrYes then

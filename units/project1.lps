@@ -48,8 +48,8 @@
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="uDtmGlobal"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="123"/>
-        <CursorPos X="54" Y="141"/>
+        <TopLine Value="114"/>
+        <CursorPos X="40" Y="147"/>
         <UsageCount Value="54"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -76,7 +76,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPesquisa"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="65"/>
+        <TopLine Value="36"/>
         <CursorPos Y="110"/>
         <UsageCount Value="54"/>
         <Loaded Value="True"/>
@@ -92,7 +92,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <TopLine Value="436"/>
-        <CursorPos X="80" Y="445"/>
+        <CursorPos X="69" Y="445"/>
         <UsageCount Value="54"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>

@@ -52,6 +52,7 @@ object dtmGlobal: TdtmGlobal
     Transaction = transProduto
     SQL.Strings = (
       'select * from produto'
+      'where situacao <> ''I'''
     )
     InsertSQL.Strings = (
       'insert into produto'
