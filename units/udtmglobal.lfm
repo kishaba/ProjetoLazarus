@@ -46,6 +46,7 @@ object dtmGlobal: TdtmGlobal
         Precision = -1
         Size = 1
       end>
+    AfterDelete = qryProdutoAfterDelete
     AfterPost = qryProdutoAfterPost
     Database = conexao
     Transaction = transProduto
@@ -69,7 +70,9 @@ object dtmGlobal: TdtmGlobal
       ''
     )
     DeleteSQL.Strings = (
-      'delete from produto'
+      'update produto'
+      'set'
+      '  SITUACAO = ''I'''
       'where'
       '  CODPRODUTO = :OLD_CODPRODUTO'
       ''

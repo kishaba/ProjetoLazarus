@@ -82,6 +82,7 @@ type
     procedure TotalizaPedido;
     procedure LimpaCampos;
     procedure DesativaCampos;
+    function  ValidaCampos:Boolean;
 
   public
     fTotal: currency;
@@ -253,14 +254,49 @@ begin
   end;
 end;
 
+function TfrmLanPedidoVenda.ValidaCampos: Boolean;
+begin
+  if edtNumeroPedido.Text=trim('') then
+  begin
+    ShowMessage('Informe um valor para o número do pedido');
+    edtNumeroPedido.SetFocus;
+    Result := False;
+  end
+  else if edtReferencia.Text=trim('') then
+  begin
+    ShowMessage('Informe um valor para a referencia');
+    edtReferencia.SetFocus;
+    Result := False;
+  end
+  else if DateToStr(edtData.Date)=trim('') then
+  begin
+    ShowMessage('Informe um valor para a data');
+    edtData.SetFocus;
+    Result := False;
+  end
+  else if edtCodigoCliente.Text=trim('') then
+  begin
+    ShowMessage('Informe um código parao cliente');
+    edtCodigoCliente.SetFocus;
+    Result := False;
+  end
+  else
+  begin
+    Result := true;
+  end;
+end;
+
 procedure TfrmLanPedidoVenda.actSalvarExecute(Sender: TObject);
 begin
   dsPadrao.DataSet.FieldByName('DATAEMISSAO').AsDateTime := edtData.Date;
-  inherited;
-  grpProduto.Enabled:=true;
-   btnPesquisaProduto.Enabled:=true;
-  BuscaPedido(StrToInt(edtCodigo.text));
-  btnBuscaPedido.Enabled:=true;
+  if ValidaCampos then
+  begin
+    inherited;
+    grpProduto.Enabled:=true;
+    btnPesquisaProduto.Enabled:=true;
+    BuscaPedido(StrToInt(edtCodigo.text));
+    btnBuscaPedido.Enabled:=true;
+  end;
 end;
 
 procedure TfrmLanPedidoVenda.actEditaExecute(Sender: TObject);
@@ -406,7 +442,7 @@ end;
 
 procedure TfrmLanPedidoVenda.btnPesquisaProdutoClick(Sender: TObject);
 begin
-  frmPesquisa := tfrmPesquisa.Create(self, ['codproduto', 'descricao'],
+  frmPesquisa := tfrmPesquisa.Create(self, ['codproduto', 'descricao','situacao'],
     'produto', 'codproduto');
   try
     if frmPesquisa.ShowModal = mrYes then

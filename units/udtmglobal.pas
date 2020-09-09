@@ -72,6 +72,7 @@ type
     procedure qryItemPedidoAfterPost(DataSet: TDataSet);
     procedure qryPedidoAfterDelete(DataSet: TDataSet);
     procedure qryPedidoAfterPost(DataSet: TDataSet);
+    procedure qryProdutoAfterDelete(DataSet: TDataSet);
     procedure qryProdutoAfterPost(DataSet: TDataSet);
   private
     procedure LerConfiguracao;
@@ -123,6 +124,12 @@ procedure TdtmGlobal.qryPedidoAfterPost(DataSet: TDataSet);
 begin
   qryPedido.ApplyUpdates;
   transPedido.CommitRetaining;
+end;
+
+procedure TdtmGlobal.qryProdutoAfterDelete(DataSet: TDataSet);
+begin
+  qryProduto.ApplyUpdates;
+  transProduto.CommitRetaining;
 end;
 
 procedure TdtmGlobal.qryProdutoAfterPost(DataSet: TDataSet);
