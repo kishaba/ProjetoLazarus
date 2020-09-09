@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="21"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -22,7 +22,7 @@
         <UnitName Value="uPrincipal"/>
         <TopLine Value="125"/>
         <CursorPos Y="195"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -36,7 +36,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="105"/>
         <CursorPos X="6" Y="127"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit2>
@@ -50,7 +50,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="114"/>
         <CursorPos X="40" Y="147"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -64,7 +64,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="114"/>
         <CursorPos X="3" Y="131"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit4>
@@ -75,10 +75,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uPesquisa"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="36"/>
-        <CursorPos Y="110"/>
-        <UsageCount Value="54"/>
+        <TopLine Value="42"/>
+        <CursorPos X="35" Y="55"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit5>
@@ -89,11 +90,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uLanPedidoVenda"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <TopLine Value="436"/>
-        <CursorPos X="69" Y="445"/>
-        <UsageCount Value="54"/>
+        <CursorPos X="57" Y="456"/>
+        <UsageCount Value="55"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit6>
@@ -107,7 +107,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="57" Y="23"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="40"/>
       </Unit7>
       <Unit8>
         <Filename Value="uencerrapedido.pas"/>
@@ -119,7 +119,7 @@
         <EditorIndex Value="9"/>
         <TopLine Value="30"/>
         <CursorPos X="14" Y="69"/>
-        <UsageCount Value="35"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit8>
